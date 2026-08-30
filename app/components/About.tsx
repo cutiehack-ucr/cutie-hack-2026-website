@@ -37,7 +37,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="w-full bg-white px-10 py-16 text-black sm:px-14 lg:px-20"
+      className="w-full px-10 py-16 text-black sm:px-14 lg:px-20"
     >
       <h2 className="mb-12 text-center text-4xl font-bold tracking-tight sm:text-5xl">
         About [Hackathon name]
