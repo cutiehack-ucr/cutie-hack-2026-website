@@ -22,7 +22,7 @@ const fraunces = Fraunces({
 const labrada = Labrada({
   variable: "--font-labrada-family",
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {
