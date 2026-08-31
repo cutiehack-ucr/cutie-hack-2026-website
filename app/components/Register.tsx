@@ -18,7 +18,7 @@ const roles: RoleCard[] = [
     image: "/register/participant.svg",
     description:
       "Participants can build with the freedom of their creativity across a variety of fields from software, hardware, AI/ML, data science, AR/VR, game development, and more!",
-    applyHref: "https://www.google.com",
+    applyHref: "https://athena-wheat.vercel.app/cutiehack/forms/participant",
   },
   {
     id: "mentor",
@@ -57,7 +57,7 @@ const roles: RoleCard[] = [
     image: "/register/volunteer.svg",
     description:
       "Help out our organizing team directly on the day of the hackathon through shifts, including answering general inquiries from hackers, distributing meals, and more.",
-    applyHref: "https://www.google.com",
+    applyHref: "https://athena-wheat.vercel.app/cutiehack/forms/volunteer",
   },
 ];
 
@@ -71,6 +71,8 @@ const cardFrame =
   "flex min-h-0 flex-1 flex-col rounded-[8px] p-[2px] bg-[conic-gradient(from_90deg,var(--color-brown-700)_0deg,var(--color-gold-500)_360deg)]";
 const cardInner =
   "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[6px] bg-linear-to-b from-white-100 to-gray-100";
+const applyButton =
+  "inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-semibold shadow-md transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500";
 
 const RegisterHeading = () => (
   <h2 className="flex items-center gap-10 leading-none">
@@ -177,7 +179,7 @@ const RegisterCarousel = () => {
                     href={role.applyHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-auto inline-flex h-10 w-full shrink-0 items-center justify-center rounded-lg bg-gold-500 font-fraunces text-sm font-semibold shadow-md transition duration-200 ease-out hover:scale-[1.02] hover:shadow-lg sm:text-base"
+                    className={`${applyButton} mt-auto h-10 w-full text-sm sm:text-base`}
                   >
                     Apply as {role.name}
                   </a>
@@ -297,7 +299,7 @@ const Register = () => {
                                 rel="noopener noreferrer"
                                 onClick={(event) => event.stopPropagation()}
                                 onKeyDown={(event) => event.stopPropagation()}
-                                className="mt-2 inline-flex h-8 w-48 shrink-0 self-end items-center justify-center rounded-lg bg-gold-500 px-3 text-center font-fraunces text-xs font-semibold shadow-md transition duration-200 ease-out hover:scale-105 hover:shadow-lg sm:text-sm"
+                                className={`${applyButton} mt-2 h-8 w-48 self-end px-3 text-center text-xs sm:text-sm`}
                               >
                                 Apply as {role.name}
                               </a>
