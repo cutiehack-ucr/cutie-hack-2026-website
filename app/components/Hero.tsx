@@ -80,7 +80,7 @@ const Hero = ({ targetDate = DEFAULT_TARGET_DATE }: HeroProps) => {
   ] as const;
 
   return (
-    <section className="flex flex-col items-center bg-white px-6 py-32 text-black">
+    <section className="flex flex-col items-center px-6 py-32 text-black">
       <div className="flex w-fit -translate-x-32 flex-col items-start sm:-translate-x-48 lg:-translate-x-64">
         <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl">
           [Hackathon name]
