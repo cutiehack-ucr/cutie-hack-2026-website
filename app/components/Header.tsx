@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import {
   FaInstagram,
   FaDiscord,
@@ -66,8 +66,13 @@ const socialLinks = [
   },
 ];
 
+const fadeIn =
+  "opacity-100 transition-opacity duration-300 ease-out starting:opacity-0";
+
 const Header = () => {
   const [activeSection, setActiveSection] = useState("register");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const scrollingTo = useRef<string | null>(null);
 
 
@@ -81,7 +86,8 @@ const Header = () => {
   
     if (section) {
       scrollingTo.current = id;
-      const offset = id === "faq" ? 200 : 120;
+      const isSmall = window.matchMedia("(max-width: 1023px)").matches;
+      const offset = isSmall ? 60 : id === "faq" ? 200 : 120;
       const top =
         section.getBoundingClientRect().top + window.scrollY - offset;
   
@@ -92,6 +98,8 @@ const Header = () => {
     }
   
     setActiveSection(id);
+    setMenuOpen(false);
+    setOpenMobileDropdown(null);
   };
 
   useEffect(() => {
@@ -166,6 +174,14 @@ const Header = () => {
     document.addEventListener("mousedown", closeOpenDropdowns);
     return () => document.removeEventListener("mousedown", closeOpenDropdowns);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
 
   return (
@@ -277,8 +293,172 @@ const Header = () => {
         </div>
       </div>
       {/**small screen version*/}
-      <div className="block xl:hidden">
+      <div className="lg:hidden">
+        <div className="relative z-50 flex items-start justify-between px-4 pt-4">
+          <Link
+            href="/"
+            className="shrink-0 transition-transform duration-300 ease-out hover:scale-110"
+            onClick={(event) => scrollToSection(event, "hero")}
+          >
+            <Image
+              src="/logo.svg"
+              alt="Cutie Hack 2026 Logo"
+              width={45.5}
+              height={39}
+              className="h-auto w-full"
+            />
+          </Link>
 
+          <button
+            type="button"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => {
+              setMenuOpen((open) => !open);
+              setOpenMobileDropdown(null);
+            }}
+            className="inline-flex shrink-0 items-center justify-center pt-2"
+          >
+            {menuOpen ? (
+              <span className="flex items-center justify-center">
+                <X className="size-[35px] text-blue-900" strokeWidth={1} />
+              </span>
+            ) : (
+              <Image
+                src="/quill_hamburger.svg"
+                alt=""
+                width={39}
+                height={39}
+                className="h-auto"
+              />
+            )}
+          </button>
+        </div>
+
+        {menuOpen && (
+          <div className={`fixed inset-x-0 top-0 z-40 flex h-1/2 flex-col bg-white-100 ${fadeIn}`}>
+          <nav
+            className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-6 pb-6 pt-24 text-xl"
+            aria-label="Main"
+          >
+            {navLinks.map(({ href, label, dropdown }, index) => {
+              const active =
+                activeSection === href.slice(1) ||
+                (href === "#about" && activeSection === "past-projects") ||
+                (href === "#people" &&
+                  ["sponsors", "industry", "team"].includes(activeSection));
+              const openIndex = navLinks.findIndex(
+                (link) => link.href === openMobileDropdown
+              );
+              const fadeBelow =
+                openMobileDropdown !== null &&
+                openIndex !== -1 &&
+                index > openIndex;
+
+              if (dropdown) {
+                const isOpen = openMobileDropdown === href;
+
+                return (
+                  <div
+                    key={fadeBelow ? `${href}-${openMobileDropdown}` : href}
+                    className={fadeBelow ? fadeIn : ""}
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOpenMobileDropdown(isOpen ? null : href)
+                      }
+                      className={`relative inline-flex cursor-pointer items-center gap-1 py-2 ${
+                        active
+                          ? "after:opacity-100"
+                          : "after:opacity-0 hover:after:opacity-50"
+                      } after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 after:transition-opacity after:duration-300`}
+                    >
+                      {label}
+                      <ChevronDown
+                        className={`size-4 transition-transform duration-300 ease-out ${
+                          isOpen ? "rotate-0" : "-rotate-90"
+                        }`}
+                        aria-hidden="true"
+                      />
+                    </button>
+                    {isOpen && (
+                      <div className={`mb-1 ml-3 flex flex-col gap-1 text-lg ${fadeIn}`}>
+                        {dropdown.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={(event) =>
+                              scrollToSection(event, item.href.slice(1))
+                            }
+                            className="rounded-md px-2 py-1.5"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={fadeBelow ? `${href}-${openMobileDropdown}` : href}
+                  href={href}
+                  onClick={(event) => scrollToSection(event, href.slice(1))}
+                  className={`relative inline-flex w-fit py-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 after:transition-opacity after:duration-300 ${
+                    fadeBelow ? fadeIn : ""
+                  } ${
+                    active
+                      ? "after:opacity-100"
+                      : "after:opacity-0 hover:after:opacity-50"
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+
+              <a
+                key={openMobileDropdown ?? "dashboard"}
+                href="https://athena-wheat.vercel.app/cutiehack/live/dashboard"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center rounded-[10px] ${
+                  openMobileDropdown ? fadeIn : ""
+                }`}
+              >
+                <span className="bg-gradient-to-b from-gold-500 to-brown-700 bg-clip-text text-transparent">
+                  Dashboard
+                </span>
+              </a>
+            
+          </nav>
+          <div className="flex shrink-0 items-center gap-4 px-6 pb-4">
+              {socialLinks.map(({ href, label, icon: Icon }) => {
+                const isMail = href.startsWith("mailto:");
+
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target={isMail ? undefined : "_blank"}
+                    rel={isMail ? undefined : "noopener noreferrer"}
+                    aria-label={label}
+                    className="inline-flex items-center justify-center text-blue-900"
+                  >
+                    <Icon className="size-7" />
+                  </a>
+                );
+              })}
+          </div>
+          <div
+            className="h-[3px] w-full shrink-0 bg-gradient-to-b from-gold-500 to-brown-700"
+            aria-hidden="true"
+          />
+          </div>
+        )}
       </div>
     </header>
   );
