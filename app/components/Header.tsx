@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import {
   FaInstagram,
@@ -7,89 +10,275 @@ import {
   FaGithub,
   FaRegEnvelope,
 } from "react-icons/fa";
+import {useState, useEffect, useRef} from "react";
 
 const navLinks = [
   { href: "#register", label: "Register" },
-  { href: "#about", label: "About", hasDropdown: true },
+  {
+    href: "#about",
+    label: "About",
+    dropdown: [
+      { href: "#about", label: "About Cutie Hack" },
+      { href: "#past-projects", label: "Past Projects" },
+    ],
+  },
   { href: "#tracks", label: "Tracks" },
   { href: "#schedule", label: "Schedule" },
-  { href: "#people", label: "People", hasDropdown: true },
-  { href: "#team", label: "Team" },
+  {
+    href: "#people",
+    label: "People",
+    dropdown: [
+      { href: "#sponsors", label: "Sponsors" },
+      { href: "#industry", label: "Industry" },
+      { href: "#team", label: "Team" },
+    ],
+  },
   { href: "#faq", label: "FAQ" },
+];
+
+const sections = [
+  "register",
+  "about",
+  "past-projects",
+  "tracks",
+  "schedule",
+  "team",
+  "faq",
+  "sponsors",
+  "industry",
 ];
 
 const socialLinks = [
   {
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/cutiehack_ucr/",
     label: "Instagram",
     icon: FaInstagram,
   },
   {
-    href: "https://discord.com",
+    href: "https://www.discord.gg/33JTAhGHuu",
     label: "Discord",
     icon: FaDiscord,
   },
   {
-    href: "https://linkedin.com",
-    label: "LinkedIn",
-    icon: FaLinkedin,
-  },
-  {
-    href: "https://github.com",
-    label: "GitHub",
-    icon: FaGithub,
-  },
-  {
-    href: "mailto:hello@example.com",
+    href: "mailto:cutiehack@gmail.com",
     label: "Email",
     icon: FaRegEnvelope,
   },
 ];
 
 const Header = () => {
+  const [activeSection, setActiveSection] = useState("register");
+  const scrollingTo = useRef<string | null>(null);
+
+
+  const scrollToSection = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    event.preventDefault();
+  
+    const section = document.getElementById(id);
+  
+    if (section) {
+      scrollingTo.current = id;
+      const offset = id === "faq" ? 200 : 120;
+      const top =
+        section.getBoundingClientRect().top + window.scrollY - offset;
+  
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+    }
+  
+    setActiveSection(id);
+  };
+
+  useEffect(() => {
+    const user = new IntersectionObserver((entries) => {
+      if (scrollingTo.current) {
+        return;
+      }
+
+      const visibleSections = entries.filter(
+        (entry) => entry.isIntersecting
+      );
+
+      if (visibleSections.length > 0) {
+        const closestSection = visibleSections.reduce(
+          (closest, current) => {
+            return Math.abs(current.boundingClientRect.top) <
+              Math.abs(closest.boundingClientRect.top)
+              ? current
+              : closest;
+          }
+        );
+
+        setActiveSection(closestSection.target.id);
+      }
+    }, {
+      rootMargin: "-120px 0px -100% 0px",
+    });
+
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) {
+        user.observe(section);
+      }
+
+    });
+
+    const unlock = () => {
+      scrollingTo.current = null;
+    };
+
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      if (!scrollingTo.current) {
+        return;
+      }
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(unlock, 150);
+    };
+
+    window.addEventListener("scrollend", unlock);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      user.disconnect();
+      window.removeEventListener("scrollend", unlock);
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(scrollTimeout);
+    };
+
+  }, []);
+
+  useEffect(() => {
+    const closeOpenDropdowns = (event: MouseEvent) => {
+      document.querySelectorAll("header details[open]").forEach((details) => {
+        if (!details.contains(event.target as Node)) {
+          details.removeAttribute("open");
+        }
+      });
+    };
+
+    document.addEventListener("mousedown", closeOpenDropdowns);
+    return () => document.removeEventListener("mousedown", closeOpenDropdowns);
+  }, []);
+
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-white text-2xl font-medium text-black">
-      <div className="grid h-20 w-full grid-cols-[1fr_auto_1fr] items-center gap-8 px-10 sm:px-14 lg:px-20">
-        <Link
-          href="/"
-          className="justify-self-start transition-transform duration-300 ease-out hover:scale-110"
-        >
-          [Logo]
-        </Link>
-
-        <div className="flex items-center gap-7" aria-label="Main">
-          {navLinks.map(({ href, label, hasDropdown }) => (
+    <header className="sticky top-0 z-50 w-full text-2xl font-fraunces text-blue-900">
+      {/*large screen version*/}
+      <div className="hidden lg:block lg:px-15 xl:px-20 pt-5">
+        <div className="bg-gradient-to-b from-gold-500 to-brown-700 p-[3px] shadow-sm rounded-[30px]">
+          <div className="flex h-18 w-full min-w-0 justify-between items-center rounded-[27px] bg-white-100 gap-[clamp(8px,1.5vw,24px)] px-[clamp(8px,1.2vw,20px)]">
             <Link
-              key={href}
-              href={href}
-              className="inline-flex items-center gap-1 transition-transform duration-300 ease-out hover:scale-110"
+              href="/"
+              className="transition-transform duration-300 ease-out hover:scale-110 shrink-0"
+              onClick = {(event) => scrollToSection(event, "hero")}
             >
-              {label}
-              {hasDropdown && (
-                <ChevronDown className="size-3.5" aria-hidden="true" />
-              )}
+              <Image
+              src="/logo.svg"
+              alt="Cutie Hack 2026 Logo"
+              width={66}
+              height={57}
+              className="h-auto w-[clamp(42px,4vw,66px)]"
+            />
             </Link>
-          ))}
-        </div>
 
-        <div className="flex items-center justify-end gap-4">
-          {socialLinks.map(({ href, label, icon: Icon }) => {
-            const isMail = href.startsWith("mailto:");
+            <nav className="relative flex min-w-0 flex-1 self-stretch items-center justify-center gap-[clamp(16px,calc(6.3vw-40px),50px)] text-[clamp(18px,1.5vw,22px)]" aria-label="Main">
+              {navLinks.map(({ href, label, dropdown }) => {
+                const active =
+                activeSection === href.slice(1) ||
+                (href === "#about" && activeSection === "past-projects") ||
+                (href === "#people" && ["sponsors", "industry", "team"].includes(activeSection));
 
-            return (
+                if (dropdown) {
+                  return (
+                    <details
+                      key={href}
+                      className="group relative flex h-full items-center"
+                      onMouseLeave={(event) => {
+                        event.currentTarget.removeAttribute("open");
+                      }}
+                    >
+                      <summary className={`relative inline-flex cursor-pointer list-none items-center gap-1 whitespace-nowrap transition-transform duration-300 ease-out after:transition-opacity after:duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 ${active ? "after:opacity-100" : "after:opacity-0 hover:after:opacity-50"}`}>
+                        {label}
+                        <ChevronDown className="size-3.5" aria-hidden="true" />
+                      </summary>
+                      <div className="absolute -left-4 top-[calc(100%)] z-10 min-w-[clamp(200px,13vw,290px)] rounded-b-[25px] bg-gradient-to-b from-gold-500 to-brown-700 p-[3px] shadow-md text-[clamp(14px,1.3vw,22px)]">
+                        <div className="rounded-b-[22px] bg-white-100 px-[clamp(12px,1.2vw,20px)] py-[clamp(8px,1vw,16px)]">
+                          {dropdown.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={(event) => {
+                                scrollToSection(event, item.href.slice(1));
+                                event.currentTarget
+                                  .closest("details")
+                                  ?.removeAttribute("open");
+                              }}
+                              className="relative inline-flex whitespace-nowrap rounded-md px-[clamp(8px,0.5vw,16px)] py-[clamp(4px,0.6vw,8px)] after:transition-opacity after:duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 after:opacity-0 hover:after:opacity-50"
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </details>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick = {(event) => scrollToSection(event, href.slice(1))}
+                    className={`relative inline-flex items-center gap-1 whitespace-nowrap transition-transform duration-300 ease-out after:transition-opacity after:duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 ${active ? "after:opacity-100": "after:opacity-0 hover:after:opacity-50"}`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+              <div className="bg-gradient-to-b from-gold-500 to-brown-700 p-[1.5px] rounded-[12px]">
               <a
-                key={label}
-                href={href}
-                target={isMail ? undefined : "_blank"}
-                rel={isMail ? undefined : "noopener noreferrer"}
-                aria-label={label}
-                className="inline-flex size-7 items-center justify-center text-black transition-transform duration-300 ease-out hover:scale-110"
+                href="https://athena-wheat.vercel.app/cutiehack/live/dashboard"
+                target="_blank"
+                className="inline-flex items-center whitespace-nowrap rounded-[10px] bg-white-100 px-[clamp(8px,0.8vw,12px)] py-[clamp(4px,0.5vw,8px)] ease-out hover:bg-gold-500 duration-300"
               >
-                <Icon className="size-full" />
+                Dashboard
               </a>
-            );
-          })}
+              </div>
+            </nav>
+
+            <div className="h-12 w-[3px] shrink-0 bg-gradient-to-b from-gold-500 to-brown-700" aria-hidden="true" />
+
+            <div className="flex shrink-0 items-center justify-end gap-[clamp(6px,1.2vw,20px)]">
+              {socialLinks.map(({ href, label, icon: Icon }) => {
+                const isMail = href.startsWith("mailto:");
+
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target={isMail ? undefined : "_blank"}
+                    rel={isMail ? undefined : "noopener noreferrer"}
+                    aria-label={label}
+                    className="inline-flex items-center justify-center text-blue-900 transition-transform duration-300 ease-out hover:scale-110"
+                  >
+                    <Icon className="size-[clamp(20px,2.4vw,35px)]" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
+      </div>
+      {/**small screen version*/}
+      <div className="block xl:hidden">
+
       </div>
     </header>
   );
