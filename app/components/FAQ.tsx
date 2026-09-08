@@ -78,7 +78,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="relative flex w-full flex-col items-center overflow-x-clip px-4 pb-[1.74vw] scroll-mt-20"
+      className="relative flex w-full scroll-mt-20 flex-col items-center overflow-x-clip px-4 pb-[1.74vw]"
     >
       <div className="relative aspect-1167/494 w-[81vw] max-lg:aspect-320/249 max-lg:w-screen">
         <Image
@@ -99,7 +99,7 @@ export default function FAQ() {
           aria-hidden
         />
 
-        <div className="absolute top-full left-1/2 z-3 mt-[calc(39.29%-26.6px)] aspect-930/767 w-[min(78vw,950px)] -translate-x-1/2 max-lg:mt-[calc(36%-19.9px)] max-lg:aspect-auto max-lg:min-h-[min(300vw,1735px)] max-lg:w-[min(90vw,520px)] max-lg:rounded-xl max-lg:bg-linear-to-br max-lg:from-gold-500 max-lg:to-brown-700">
+        <div className="max-lg:from-gold-500 max-lg:to-brown-700 absolute top-full left-1/2 z-3 mt-[calc(39.29%-26.6px)] aspect-930/767 w-[min(78vw,950px)] -translate-x-1/2 max-lg:mt-[calc(36%-19.9px)] max-lg:aspect-auto max-lg:min-h-[min(300vw,1735px)] max-lg:w-[min(90vw,520px)] max-lg:rounded-xl max-lg:bg-linear-to-br">
           <Image
             src="/faq/faqPanel.svg"
             alt=""
@@ -109,7 +109,7 @@ export default function FAQ() {
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-[6px] hidden rounded-[6px] bg-white-100 max-lg:block"
+            className="bg-white-100 pointer-events-none absolute inset-[6px] hidden rounded-[6px] max-lg:block"
             aria-hidden
           />
 
@@ -122,7 +122,7 @@ export default function FAQ() {
               <Diamond />
             </h2>
 
-            <div className="relative grid min-h-0 flex-1 grid-cols-2 gap-x-[clamp(28px,4vw,64px)] gap-y-[clamp(16px,2.4vw,32px)] after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 after:bg-gold-500 max-lg:flex-none max-lg:grid-cols-1 max-lg:after:hidden">
+            <div className="after:bg-gold-500 relative grid min-h-0 flex-1 grid-cols-2 gap-x-[clamp(28px,4vw,64px)] gap-y-[clamp(16px,2.4vw,32px)] after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 max-lg:flex-none max-lg:grid-cols-1 max-lg:after:hidden">
               {columns.map((col, i) => (
                 <div
                   key={i}
@@ -134,7 +134,7 @@ export default function FAQ() {
                       <div key={item.question}>
                         <button
                           type="button"
-                          className="flex w-full cursor-pointer items-start justify-between gap-[clamp(12px,1.4vw,18px)] border-none bg-transparent py-2 text-left font-fraunces text-2xl text-red-700"
+                          className="font-fraunces flex w-full cursor-pointer items-start justify-between gap-[clamp(12px,1.4vw,18px)] border-none bg-transparent py-2 text-left text-2xl text-red-700"
                           aria-expanded={isOpen}
                           onClick={() =>
                             setOpenKey(isOpen ? null : item.question)
@@ -142,7 +142,7 @@ export default function FAQ() {
                         >
                           <span
                             aria-hidden
-                            className="shrink-0 font-fraunces text-red-700"
+                            className="font-fraunces shrink-0 text-red-700"
                           >
                             {isOpen ? "▴" : "▾"}
                           </span>
@@ -154,7 +154,7 @@ export default function FAQ() {
                           }`}
                         >
                           <div className="overflow-hidden">
-                            <p className="px-6 pt-1 pb-2.5 font-fraunces text-lg leading-normal text-red-500">
+                            <p className="font-fraunces px-6 pt-1 pb-2.5 text-lg leading-normal text-red-500">
                               {item.answer}
                             </p>
                           </div>

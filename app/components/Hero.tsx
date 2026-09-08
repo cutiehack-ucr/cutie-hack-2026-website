@@ -107,14 +107,12 @@ const Hero = ({ targetDate = DEFAULT_TARGET_DATE }: HeroProps) => {
               </span>
             )}
 
-            <div className="flex min-w-32px flex-col items-center">
+            <div className="min-w-32px flex flex-col items-center">
               <span className="text-3xl sm:text-4xl">
                 {formatNumber(unit.value)}
               </span>
 
-              <span className="mt-1.5 sm:text-lg">
-                {unit.label}
-              </span>
+              <span className="mt-1.5 sm:text-lg">{unit.label}</span>
             </div>
           </div>
         ))}

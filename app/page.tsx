@@ -15,8 +15,8 @@ export default function Home() {
       <Register />
       <About />
       <PastProjects />
-      <Schedule/>
-      <Sponsors/>
+      <Schedule />
+      <Sponsors />
       <Team />
       <FAQ />
     </main>
