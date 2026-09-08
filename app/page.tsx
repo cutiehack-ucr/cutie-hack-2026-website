@@ -5,6 +5,7 @@ import PastProjects from "./components/PastProjects";
 import Schedule from "./components/Schedule";
 import Sponsors from "./components/Sponsors";
 import Team from "./components/Team";
+import FAQ from "./components/FAQ";
 export const dynamic = "force-dynamic";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Schedule/>
       <Sponsors/>
       <Team />
+      <FAQ />
     </main>
   );
 }
