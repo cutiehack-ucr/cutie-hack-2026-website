@@ -1,0 +1,498 @@
+.hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1440 / 984;
+    height: auto;
+
+    overflow: hidden;
+    container-type: inline-size;
+
+    background:
+        radial-gradient(circle at 48% 24%,
+            rgba(110, 158, 196, 0.3),
+            transparent 46%),
+        linear-gradient(90deg,
+            #334356 0%,
+            #557fa3 48%,
+            #6a9eca 100%);
+
+    color: #fffaf1;
+}
+
+/* ========================================
+   DARK LOWER SHADING
+======================================== */
+
+.shading {
+    position: absolute;
+    z-index: 8;
+
+    left: -1;
+    bottom: 2.8%;
+
+    width:27.7%;
+    
+
+    pointer-events: none;
+}
+
+/* ========================================
+   LEFT BACKGROUND BLUE CLOUD
+======================================== */
+
+.cloudLeftSmall {
+    position: absolute;
+    z-index: 4;
+
+    left: 0%;
+    top: 54.3%;
+
+    width: 26.8%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   LARGE DARK BLUE BACKGROUND CLOUD
+======================================== */
+
+.cloudMain {
+    position: absolute;
+    z-index: 3;
+
+    left: 10.5%;
+    top: 53%;
+
+    width: 65%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   BLUE CLOUD BEHIND WATCH
+======================================== */
+
+.cloudCenter {
+    position: absolute;
+    z-index: 7;
+
+    left: 44.9%;
+    top: 41.8%;
+
+    width: 37.5%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   RIGHT BACKGROUND BLUE CLOUD
+======================================== */
+
+.cloudRightSmall {
+    position: absolute;
+    z-index: 4;
+
+    right: 0%;
+    top: 23.8%;
+
+    width: 22%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   LEFT FOREGROUND CLOUD
+======================================== */
+
+.cloudLeftWide {
+    position: absolute;
+    z-index: 6;
+
+    left: 0%;
+    bottom: 0%;
+
+    width: 42.6%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   RIGHT FOREGROUND CLOUD
+======================================== */
+
+.cloudRight {
+    position: absolute;
+    z-index: 7;
+
+    right: 0%;
+    bottom: 10%;
+
+    width: 57.5%;
+    
+
+    pointer-events: none;
+}
+
+/* ========================================
+   CHAIN
+======================================== */
+
+.chains {
+    position: absolute;
+    z-index: 9;
+
+    
+    left: 23.7%;
+
+    width: 38.5%;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   COPY
+======================================== */
+
+.copy {
+    position: absolute;
+    z-index: 30;
+
+    left: 7.4%;
+    top: 16.5%;
+    width: 47%;
+}
+
+.eyebrow {
+    margin: 0 0 0.75cqw;
+    font-family: var(--font-fraunces), serif;
+    font-size: 2.68cqw;
+    font-weight: 400;
+    line-height: 1.21;
+    color: #ffdc98;
+
+    text-shadow:
+        0.1 0.50cqw 4 #334356d2,
+        0 0.20cqw 0.04cqw rgba(35, 48, 62, 0.35);
+}
+
+.title {
+    margin: 0;
+
+    font-family: var(--font-griffy), serif;
+    font-size: 5.37cqw;
+    font-weight: 400;
+    line-height: 1.15;
+
+    white-space: nowrap;
+    color: #ffdc98;
+
+    text-shadow:
+        
+        0.1 0.50cqw 5.5 #334356,
+        0 0.38cqw 0.30cqw rgba(20, 31, 43, 0.42);
+}
+
+.date {
+    margin: 0.55cqw 0 0;
+
+    font-family: var(--font-labrada), serif;
+    font-size: 2.14cqw;
+    font-weight: 400;
+    line-height: 1.21;
+
+    white-space: nowrap;
+    color: #fffaf1;
+
+    text-shadow:
+        0 0.11cqw 0.03cqw rgba(35, 48, 62, 0.55),
+        0 0.18cqw 0.10cqw rgba(35, 48, 62, 0.22);
+}
+
+.description {
+    margin: 1.05cqw 0 0;
+
+    font-family: var(--font-labrada), serif;
+    font-size: 1.52cqw;
+    font-weight: 400;
+    line-height: 1.21;
+    color: #fffaf1;
+
+    text-shadow:
+            0.1 0.50cqw 4 #334356d2,
+            0 0.20cqw 0.04cqw rgba(35, 48, 62, 0.35);
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.actions {
+    display: flex;
+    gap: 1.3cqw;
+    margin-top: 2cqw;
+}
+.primaryButton,
+.secondaryButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 11.2cqw;
+    height: 3.75cqw;
+    padding: 0 1.25cqw;
+    border-radius: 0.65cqw;
+
+    font-family: var(--font-labrada), serif;
+    font-size: 1.35cqw;
+
+
+    text-decoration: none;
+    transition: transform 0.18s ease;
+}
+
+.primaryButton {
+    color: #334356;
+    background: #e8b466;
+
+    border: 0.07cqw solid #d79b43;
+
+    box-shadow:
+        0 0.2cqw 0.2cqw rgba(0, 0, 0, 0.18);
+}
+
+.secondaryButton {
+    color: white;
+
+    border: 0.07cqw solid rgba(255, 255, 255, 0.95);
+
+    background: rgba(51, 67, 86, 0.28);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+    transform: translateY(-0.13cqw);
+}
+
+/* ========================================
+   RABBIT / WATCH
+======================================== */
+
+.rabbitWrap {
+    position: absolute;
+    z-index: 20;
+
+    top: 10%;
+    right: 3.59%;
+
+    width: 49.1%;
+    aspect-ratio: 702 / 677;
+}
+
+.rabbit {
+    object-fit: contain;
+    object-position: center;
+}
+
+/* ========================================
+   COUNTDOWN
+======================================== */
+
+.countdown {
+    position: absolute;
+    z-index: 22;
+
+    top: 49%;
+    left: 35%;
+
+    width: 46%;
+
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+
+    font-family: Georgia, "Times New Roman", serif;
+    color: #334356;
+}
+
+.numberRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    white-space: nowrap;
+
+    font-size: 2.7cqw;
+    line-height: 0.95;
+}
+
+.numberRow>span:nth-child(even) {
+    margin: 0 0.07cqw;
+}
+
+.labelRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    width: 100%;
+
+    margin-top: 0.26cqw;
+
+    font-size: 1.1cqw;
+    line-height: 1;
+}
+
+/* ========================================
+   LEFT ORANGE
+======================================== */
+
+.orangeLeft {
+    position: absolute;
+    z-index: 4;
+
+    left: 3.2%;
+    top: 51%;
+
+    width: 10.8%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   MIDDLE ORANGE
+======================================== */
+
+.orangeMiddle {
+    position: absolute;
+    z-index: 8;
+
+    left: 14.33%;
+    top: 58.6%;
+
+    width: 8.5%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   RIGHT ORANGE
+======================================== */
+
+.orangeRight {
+    position: absolute;
+    z-index: 5;
+
+    right: 2.8%;
+    top: 27.8%;
+
+    width: 7.7%;
+    height: auto;
+
+    pointer-events: none;
+}
+
+/* ========================================
+   CLICKABLE ORANGE
+======================================== */
+
+.clickOrange {
+    position: absolute;
+    z-index: 24;
+
+    left: 50%;
+    top: 51.5%;
+
+    width: 19.5%;
+    aspect-ratio: 279 / 298;
+
+    padding: 0;
+    border: 0;
+    outline: none;
+
+    background: transparent;
+    cursor: pointer;
+}
+
+.clickOrange img {
+    object-fit: contain;
+}
+
+.clickCount {
+    position: absolute;
+    z-index: 25;
+    left: 53.8%;
+    top: 69.7%;
+    width: 15%;
+    height: auto;
+    overflow: visible;
+    pointer-events: none;
+
+    opacity: 0;
+    transform: translateY(0.25cqw);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.clickCountVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.clickCountText {
+    font-family: var(--font-labrada), serif;
+    font-size: 15px;
+    fill: #334356;
+}
+
+.clickOrange {
+    transition: transform 0.18s ease;
+}
+
+.clickOrangeActive {
+    transform: scale(1.12);
+}
+
+/* ========================================
+   SMALL SCREENS
+======================================== */
+
+@media (max-width: 600px) {
+    .eyebrow {
+        font-size: max(2.75cqw, 9px);
+    }
+
+    .title {
+        font-size: max(5.15cqw, 18px);
+    }
+
+    .date {
+        font-size: max(1.75cqw, 6px);
+    }
+
+    .description {
+        font-size: max(1.25cqw, 5px);
+    }
+
+    .primaryButton,
+    .secondaryButton {
+        font-size: max(1.25cqw, 5px);
+    }
+
+    .numberRow {
+        font-size: max(2.7cqw, 11px);
+    }
+
+    .labelRow {
+        font-size: max(1.1cqw, 5px);
+    }
+
+    .clickCount {
+        font-size: max(0.9cqw, 4px);
+    }
+}
