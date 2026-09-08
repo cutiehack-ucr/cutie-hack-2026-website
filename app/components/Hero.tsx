@@ -80,7 +80,10 @@ const Hero = ({ targetDate = DEFAULT_TARGET_DATE }: HeroProps) => {
   ] as const;
 
   return (
-    <section className="flex flex-col items-center px-6 py-32 text-black" id="hero">
+    <section
+      className="flex flex-col items-center px-6 py-32 text-black"
+      id="hero"
+    >
       <div className="flex w-fit -translate-x-32 flex-col items-start sm:-translate-x-48 lg:-translate-x-64">
         <h1 className="text-5xl font-bold sm:text-6xl lg:text-7xl">
           [Hackathon name]
@@ -107,14 +110,12 @@ const Hero = ({ targetDate = DEFAULT_TARGET_DATE }: HeroProps) => {
               </span>
             )}
 
-            <div className="flex min-w-32px flex-col items-center">
+            <div className="min-w-32px flex flex-col items-center">
               <span className="text-3xl sm:text-4xl">
                 {formatNumber(unit.value)}
               </span>
 
-              <span className="mt-1.5 sm:text-lg">
-                {unit.label}
-              </span>
+              <span className="mt-1.5 sm:text-lg">{unit.label}</span>
             </div>
           </div>
         ))}

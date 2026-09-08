@@ -10,7 +10,7 @@ import {
   FaGithub,
   FaRegEnvelope,
 } from "react-icons/fa";
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 
 const navLinks = [
   { href: "#register", label: "Register" },
@@ -72,68 +72,66 @@ const fadeIn =
 const Header = () => {
   const [activeSection, setActiveSection] = useState("register");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
+    null,
+  );
   const scrollingTo = useRef<string | null>(null);
-
 
   const scrollToSection = (
     event: React.MouseEvent<HTMLAnchorElement>,
-    id: string
+    id: string,
   ) => {
     event.preventDefault();
-  
+
     const section = document.getElementById(id);
-  
+
     if (section) {
       scrollingTo.current = id;
       const isSmall = window.matchMedia("(max-width: 1023px)").matches;
       const offset = isSmall ? 60 : id === "faq" ? 200 : 120;
-      const top =
-        section.getBoundingClientRect().top + window.scrollY - offset;
-  
+      const top = section.getBoundingClientRect().top + window.scrollY - offset;
+
       window.scrollTo({
         top,
         behavior: "smooth",
       });
     }
-  
+
     setActiveSection(id);
     setMenuOpen(false);
     setOpenMobileDropdown(null);
   };
 
   useEffect(() => {
-    const user = new IntersectionObserver((entries) => {
-      if (scrollingTo.current) {
-        return;
-      }
+    const user = new IntersectionObserver(
+      (entries) => {
+        if (scrollingTo.current) {
+          return;
+        }
 
-      const visibleSections = entries.filter(
-        (entry) => entry.isIntersecting
-      );
+        const visibleSections = entries.filter((entry) => entry.isIntersecting);
 
-      if (visibleSections.length > 0) {
-        const closestSection = visibleSections.reduce(
-          (closest, current) => {
+        if (visibleSections.length > 0) {
+          const closestSection = visibleSections.reduce((closest, current) => {
             return Math.abs(current.boundingClientRect.top) <
               Math.abs(closest.boundingClientRect.top)
               ? current
               : closest;
-          }
-        );
+          });
 
-        setActiveSection(closestSection.target.id);
-      }
-    }, {
-      rootMargin: "-120px 0px -100% 0px",
-    });
+          setActiveSection(closestSection.target.id);
+        }
+      },
+      {
+        rootMargin: "-120px 0px -100% 0px",
+      },
+    );
 
     sections.forEach((id) => {
       const section = document.getElementById(id);
       if (section) {
         user.observe(section);
       }
-
     });
 
     const unlock = () => {
@@ -159,7 +157,6 @@ const Header = () => {
       window.removeEventListener("scroll", onScroll);
       clearTimeout(scrollTimeout);
     };
-
   }, []);
 
   useEffect(() => {
@@ -183,33 +180,36 @@ const Header = () => {
     };
   }, [menuOpen]);
 
-
   return (
-    <header className="sticky top-0 z-50 w-full text-2xl font-fraunces text-blue-900">
+    <header className="font-fraunces sticky top-0 z-50 w-full text-2xl text-blue-900">
       {/*large screen version*/}
-      <div className="hidden lg:block lg:px-15 xl:px-20 pt-5">
-        <div className="bg-gradient-to-b from-gold-500 to-brown-700 p-[3px] shadow-sm rounded-[30px]">
-          <div className="flex h-18 w-full min-w-0 justify-between items-center rounded-[27px] bg-white-100 gap-[clamp(8px,1.5vw,24px)] px-[clamp(8px,1.2vw,20px)]">
+      <div className="hidden pt-5 lg:block lg:px-15 xl:px-20">
+        <div className="from-gold-500 to-brown-700 rounded-[30px] bg-gradient-to-b p-[3px] shadow-sm">
+          <div className="bg-white-100 flex h-18 w-full min-w-0 items-center justify-between gap-[clamp(8px,1.5vw,24px)] rounded-[27px] px-[clamp(8px,1.2vw,20px)]">
             <Link
               href="/"
-              className="transition-transform duration-300 ease-out hover:scale-110 shrink-0"
-              onClick = {(event) => scrollToSection(event, "hero")}
+              className="shrink-0 transition-transform duration-300 ease-out hover:scale-110"
+              onClick={(event) => scrollToSection(event, "hero")}
             >
               <Image
-              src="/logo.svg"
-              alt="Cutie Hack 2026 Logo"
-              width={66}
-              height={57}
-              className="h-auto w-[clamp(42px,4vw,66px)]"
-            />
+                src="/logo.svg"
+                alt="Cutie Hack 2026 Logo"
+                width={66}
+                height={57}
+                className="h-auto w-[clamp(42px,4vw,66px)]"
+              />
             </Link>
 
-            <nav className="relative flex min-w-0 flex-1 self-stretch items-center justify-center gap-[clamp(16px,calc(6.3vw-40px),50px)] text-[clamp(18px,1.5vw,22px)]" aria-label="Main">
+            <nav
+              className="relative flex min-w-0 flex-1 items-center justify-center gap-[clamp(16px,calc(6.3vw-40px),50px)] self-stretch text-[clamp(18px,1.5vw,22px)]"
+              aria-label="Main"
+            >
               {navLinks.map(({ href, label, dropdown }) => {
                 const active =
-                activeSection === href.slice(1) ||
-                (href === "#about" && activeSection === "past-projects") ||
-                (href === "#people" && ["sponsors", "industry", "team"].includes(activeSection));
+                  activeSection === href.slice(1) ||
+                  (href === "#about" && activeSection === "past-projects") ||
+                  (href === "#people" &&
+                    ["sponsors", "industry", "team"].includes(activeSection));
 
                 if (dropdown) {
                   return (
@@ -220,12 +220,14 @@ const Header = () => {
                         event.currentTarget.removeAttribute("open");
                       }}
                     >
-                      <summary className={`relative inline-flex cursor-pointer list-none items-center gap-1 whitespace-nowrap transition-transform duration-300 ease-out after:transition-opacity after:duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 ${active ? "after:opacity-100" : "after:opacity-0 hover:after:opacity-50"}`}>
+                      <summary
+                        className={`after:from-gold-500 after:to-brown-700 relative inline-flex cursor-pointer list-none items-center gap-1 whitespace-nowrap transition-transform duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:transition-opacity after:duration-300 ${active ? "after:opacity-100" : "after:opacity-0 hover:after:opacity-50"}`}
+                      >
                         {label}
                         <ChevronDown className="size-3.5" aria-hidden="true" />
                       </summary>
-                      <div className="absolute -left-4 top-[calc(100%)] z-10 min-w-[clamp(200px,13vw,290px)] rounded-b-[25px] bg-gradient-to-b from-gold-500 to-brown-700 p-[3px] shadow-md text-[clamp(14px,1.3vw,22px)]">
-                        <div className="rounded-b-[22px] bg-white-100 px-[clamp(12px,1.2vw,20px)] py-[clamp(8px,1vw,16px)]">
+                      <div className="from-gold-500 to-brown-700 absolute top-[calc(100%)] -left-4 z-10 min-w-[clamp(200px,13vw,290px)] rounded-b-[25px] bg-gradient-to-b p-[3px] text-[clamp(14px,1.3vw,22px)] shadow-md">
+                        <div className="bg-white-100 rounded-b-[22px] px-[clamp(12px,1.2vw,20px)] py-[clamp(8px,1vw,16px)]">
                           {dropdown.map((item) => (
                             <Link
                               key={item.href}
@@ -236,7 +238,7 @@ const Header = () => {
                                   .closest("details")
                                   ?.removeAttribute("open");
                               }}
-                              className="relative inline-flex whitespace-nowrap rounded-md px-[clamp(8px,0.5vw,16px)] py-[clamp(4px,0.6vw,8px)] after:transition-opacity after:duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 after:opacity-0 hover:after:opacity-50"
+                              className="after:from-gold-500 after:to-brown-700 relative inline-flex rounded-md px-[clamp(8px,0.5vw,16px)] py-[clamp(4px,0.6vw,8px)] whitespace-nowrap after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:opacity-0 after:transition-opacity after:duration-300 hover:after:opacity-50"
                             >
                               {item.label}
                             </Link>
@@ -251,25 +253,28 @@ const Header = () => {
                   <Link
                     key={href}
                     href={href}
-                    onClick = {(event) => scrollToSection(event, href.slice(1))}
-                    className={`relative inline-flex items-center gap-1 whitespace-nowrap transition-transform duration-300 ease-out after:transition-opacity after:duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 ${active ? "after:opacity-100": "after:opacity-0 hover:after:opacity-50"}`}
+                    onClick={(event) => scrollToSection(event, href.slice(1))}
+                    className={`after:from-gold-500 after:to-brown-700 relative inline-flex items-center gap-1 whitespace-nowrap transition-transform duration-300 ease-out after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:transition-opacity after:duration-300 ${active ? "after:opacity-100" : "after:opacity-0 hover:after:opacity-50"}`}
                   >
                     {label}
                   </Link>
                 );
               })}
-              <div className="bg-gradient-to-b from-gold-500 to-brown-700 p-[1.5px] rounded-[12px]">
-              <a
-                href="https://athena-wheat.vercel.app/cutiehack/live/dashboard"
-                target="_blank"
-                className="inline-flex items-center whitespace-nowrap rounded-[10px] bg-white-100 px-[clamp(8px,0.8vw,12px)] py-[clamp(4px,0.5vw,8px)] ease-out hover:bg-gold-500 duration-300"
-              >
-                Dashboard
-              </a>
+              <div className="from-gold-500 to-brown-700 rounded-[12px] bg-gradient-to-b p-[1.5px]">
+                <a
+                  href="https://athena-wheat.vercel.app/cutiehack/live/dashboard"
+                  target="_blank"
+                  className="bg-white-100 hover:bg-gold-500 inline-flex items-center rounded-[10px] px-[clamp(8px,0.8vw,12px)] py-[clamp(4px,0.5vw,8px)] whitespace-nowrap duration-300 ease-out"
+                >
+                  Dashboard
+                </a>
               </div>
             </nav>
 
-            <div className="h-12 w-[3px] shrink-0 bg-gradient-to-b from-gold-500 to-brown-700" aria-hidden="true" />
+            <div
+              className="from-gold-500 to-brown-700 h-12 w-[3px] shrink-0 bg-gradient-to-b"
+              aria-hidden="true"
+            />
 
             <div className="flex shrink-0 items-center justify-end gap-[clamp(6px,1.2vw,20px)]">
               {socialLinks.map(({ href, label, icon: Icon }) => {
@@ -336,89 +341,93 @@ const Header = () => {
         </div>
 
         {menuOpen && (
-          <div className={`fixed inset-x-0 top-0 z-40 flex h-1/2 flex-col bg-white-100 ${fadeIn}`}>
-          <nav
-            className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-6 pb-6 pt-24 text-xl"
-            aria-label="Main"
+          <div
+            className={`bg-white-100 fixed inset-x-0 top-0 z-40 flex h-1/2 flex-col ${fadeIn}`}
           >
-            {navLinks.map(({ href, label, dropdown }, index) => {
-              const active =
-                activeSection === href.slice(1) ||
-                (href === "#about" && activeSection === "past-projects") ||
-                (href === "#people" &&
-                  ["sponsors", "industry", "team"].includes(activeSection));
-              const openIndex = navLinks.findIndex(
-                (link) => link.href === openMobileDropdown
-              );
-              const fadeBelow =
-                openMobileDropdown !== null &&
-                openIndex !== -1 &&
-                index > openIndex;
+            <nav
+              className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-6 pt-24 pb-6 text-xl"
+              aria-label="Main"
+            >
+              {navLinks.map(({ href, label, dropdown }, index) => {
+                const active =
+                  activeSection === href.slice(1) ||
+                  (href === "#about" && activeSection === "past-projects") ||
+                  (href === "#people" &&
+                    ["sponsors", "industry", "team"].includes(activeSection));
+                const openIndex = navLinks.findIndex(
+                  (link) => link.href === openMobileDropdown,
+                );
+                const fadeBelow =
+                  openMobileDropdown !== null &&
+                  openIndex !== -1 &&
+                  index > openIndex;
 
-              if (dropdown) {
-                const isOpen = openMobileDropdown === href;
+                if (dropdown) {
+                  const isOpen = openMobileDropdown === href;
+
+                  return (
+                    <div
+                      key={fadeBelow ? `${href}-${openMobileDropdown}` : href}
+                      className={fadeBelow ? fadeIn : ""}
+                    >
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setOpenMobileDropdown(isOpen ? null : href)
+                        }
+                        className={`relative inline-flex cursor-pointer items-center gap-1 py-2 ${
+                          active
+                            ? "after:opacity-100"
+                            : "after:opacity-0 hover:after:opacity-50"
+                        } after:from-gold-500 after:to-brown-700 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:transition-opacity after:duration-300`}
+                      >
+                        {label}
+                        <ChevronDown
+                          className={`size-4 transition-transform duration-300 ease-out ${
+                            isOpen ? "rotate-0" : "-rotate-90"
+                          }`}
+                          aria-hidden="true"
+                        />
+                      </button>
+                      {isOpen && (
+                        <div
+                          className={`mb-1 ml-3 flex flex-col gap-1 text-lg ${fadeIn}`}
+                        >
+                          {dropdown.map((item) => (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={(event) =>
+                                scrollToSection(event, item.href.slice(1))
+                              }
+                              className="rounded-md px-2 py-1.5"
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
 
                 return (
-                  <div
+                  <Link
                     key={fadeBelow ? `${href}-${openMobileDropdown}` : href}
-                    className={fadeBelow ? fadeIn : ""}
+                    href={href}
+                    onClick={(event) => scrollToSection(event, href.slice(1))}
+                    className={`after:from-gold-500 after:to-brown-700 relative inline-flex w-fit py-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:transition-opacity after:duration-300 ${
+                      fadeBelow ? fadeIn : ""
+                    } ${
+                      active
+                        ? "after:opacity-100"
+                        : "after:opacity-0 hover:after:opacity-50"
+                    }`}
                   >
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setOpenMobileDropdown(isOpen ? null : href)
-                      }
-                      className={`relative inline-flex cursor-pointer items-center gap-1 py-2 ${
-                        active
-                          ? "after:opacity-100"
-                          : "after:opacity-0 hover:after:opacity-50"
-                      } after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 after:transition-opacity after:duration-300`}
-                    >
-                      {label}
-                      <ChevronDown
-                        className={`size-4 transition-transform duration-300 ease-out ${
-                          isOpen ? "rotate-0" : "-rotate-90"
-                        }`}
-                        aria-hidden="true"
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className={`mb-1 ml-3 flex flex-col gap-1 text-lg ${fadeIn}`}>
-                        {dropdown.map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={(event) =>
-                              scrollToSection(event, item.href.slice(1))
-                            }
-                            className="rounded-md px-2 py-1.5"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                    {label}
+                  </Link>
                 );
-              }
-
-              return (
-                <Link
-                  key={fadeBelow ? `${href}-${openMobileDropdown}` : href}
-                  href={href}
-                  onClick={(event) => scrollToSection(event, href.slice(1))}
-                  className={`relative inline-flex w-fit py-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-gold-500 after:to-brown-700 after:transition-opacity after:duration-300 ${
-                    fadeBelow ? fadeIn : ""
-                  } ${
-                    active
-                      ? "after:opacity-100"
-                      : "after:opacity-0 hover:after:opacity-50"
-                  }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
+              })}
 
               <a
                 key={openMobileDropdown ?? "dashboard"}
@@ -429,13 +438,12 @@ const Header = () => {
                   openMobileDropdown ? fadeIn : ""
                 }`}
               >
-                <span className="bg-gradient-to-b from-gold-500 to-brown-700 bg-clip-text text-transparent">
+                <span className="from-gold-500 to-brown-700 bg-gradient-to-b bg-clip-text text-transparent">
                   Dashboard
                 </span>
               </a>
-            
-          </nav>
-          <div className="flex shrink-0 items-center gap-4 px-6 pb-4">
+            </nav>
+            <div className="flex shrink-0 items-center gap-4 px-6 pb-4">
               {socialLinks.map(({ href, label, icon: Icon }) => {
                 const isMail = href.startsWith("mailto:");
 
@@ -452,11 +460,11 @@ const Header = () => {
                   </a>
                 );
               })}
-          </div>
-          <div
-            className="h-[3px] w-full shrink-0 bg-gradient-to-b from-gold-500 to-brown-700"
-            aria-hidden="true"
-          />
+            </div>
+            <div
+              className="from-gold-500 to-brown-700 h-[3px] w-full shrink-0 bg-gradient-to-b"
+              aria-hidden="true"
+            />
           </div>
         )}
       </div>

@@ -27,12 +27,12 @@ const FlipCard = ({ name, description }: FlipCardProps) => {
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-black bg-white [backface-visibility:hidden]">
-          <span className="text-xl font-semibold capitalize tracking-wide">
+          <span className="text-xl font-semibold tracking-wide capitalize">
             {name}
           </span>
         </div>
 
-        <div className="absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-black bg-white px-4 text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div className="absolute inset-0 flex [transform:rotateY(180deg)] items-center justify-center rounded-2xl border-2 border-black bg-white px-4 text-center [backface-visibility:hidden]">
           <span className="text-base leading-snug">{description}</span>
         </div>
       </div>

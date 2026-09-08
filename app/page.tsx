@@ -5,7 +5,7 @@ import PastProjects from "./components/PastProjects";
 import Schedule from "./components/Schedule";
 import Sponsors from "./components/Sponsors";
 import Team from "./components/Team";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 export const dynamic = "force-dynamic";
 
 export default function Home() {
@@ -15,8 +15,8 @@ export default function Home() {
       <Register />
       <About />
       <PastProjects />
-      <Schedule/>
-      <Sponsors/>
+      <Schedule />
+      <Sponsors />
       <Team />
       <Footer />
     </main>
