@@ -174,11 +174,13 @@
     font-weight: 400;
     line-height: 1.21;
     color: #ffdc98;
+   
 
     text-shadow:
         0.1 0.50cqw 4 #334356d2,
         0 0.20cqw 0.04cqw rgba(35, 48, 62, 0.35);
 }
+
 
 .title {
     margin: 0;
@@ -457,42 +459,424 @@
 .clickOrangeActive {
     transform: scale(1.12);
 }
+.mobileCloudLeftTop,
+.mobileCloudRight,
+.mobileCloudLeftBottom,
+.mobileCloudBg,
+.mobileMiddleShading,
+.mobileChains {
+    display: none;
+}
+.mobileCopy {
+    display: none;
+}
+
 
 /* ========================================
    SMALL SCREENS
 ======================================== */
 
 @media (max-width: 600px) {
+
+    .date,
+    .description,
+    .actions {
+        display: none;
+    }
+
+    .hero {
+        position: relative;
+
+        width: 100%;
+        aspect-ratio: 320 / 710;
+
+        height: auto;
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+    /* ========================================
+       COPY / MOBILE POSITIONING CANVAS
+    ======================================== */
+
+    .copy {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        text-align: center;
+
+        z-index: 30;
+        pointer-events: none;
+    }
+
+    /* ========================================
+       TITLE
+    ======================================== */
+
     .eyebrow {
-        font-size: max(2.75cqw, 9px);
+        position: absolute;
+
+        top: 9.4%;
+        left: 0;
+
+        width: 100%;
+
+        margin: 0;
+
+        font-size: 5.4vw;
+        line-height: 1.1;
+
+        text-shadow:
+            0.1cqw 1.20cqw 0.27cqw #334356,
+            0 0.38cqw 0.30cqw rgba(20, 31, 43, 0.42);
     }
 
     .title {
-        font-size: max(5.15cqw, 18px);
+        position: absolute;
+
+        top: 13%;
+        left: 0;
+
+        width: 100%;
+
+        margin: 0;
+
+        font-size: 10.8vw;
+        line-height: 1.05;
+
+        white-space: nowrap;
+
+        text-shadow:
+            0.1cqw 1.40cqw 0.27cqw #334356,
+            0 0.38cqw 0.30cqw rgba(20, 31, 43, 0.42);
     }
 
-    .date {
-        font-size: max(1.75cqw, 6px);
+    /* ========================================
+       MOBILE CHAIN
+    ======================================== */
+
+    .chains {
+        display: none;
     }
 
-    .description {
-        font-size: max(1.25cqw, 5px);
+    .mobileChains {
+        display: block;
+
+        position: absolute;
+        z-index: 9;
+
+        top: -9%;
+        left: -36%;
+
+        width: 70%;
+        height: auto;
+
+        transform: rotate(15deg);
+
+        pointer-events: none;
     }
 
-    .primaryButton,
-    .secondaryButton {
-        font-size: max(1.25cqw, 5px);
+    /* ========================================
+       RABBIT / WATCH
+    ======================================== */
+
+    .rabbitWrap {
+        top: 15.5%;
+        right: -7.5%;
+
+        width: 115%;
+
+        aspect-ratio: 702 / 677;
     }
 
-    .numberRow {
-        font-size: max(2.7cqw, 11px);
+    /* ========================================
+       MOBILE CLOUDS
+    ======================================== */
+
+    /* desktop-only cloud assets */
+    .cloudMain,
+    .cloudLeftSmall,
+    .cloudCenter,
+    .cloudRightSmall,
+    .cloudRight,
+    .cloudLeftWide,
+    .shading {
+        display: none;
     }
 
-    .labelRow {
-        font-size: max(1.1cqw, 5px);
+    /* top-left blue cloud */
+    .mobileCloudLeftTop {
+        display: block;
+        position: absolute;
+        z-index: 7;
+
+        top: 40%;
+        left: 0;
+
+        width: 63%;
+        height: auto;
+
+        pointer-events: none;
     }
 
+    /* blue cloud on right */
+    .mobileCloudRight {
+        display: block;
+        position: absolute;
+        z-index: 7;
+
+        top: 65%;
+        right: 0;
+
+        width: 35%;
+        height: auto;
+
+        pointer-events: none;
+    }
+
+    /* lower-left blue cloud */
+    .mobileCloudLeftBottom {
+        display: block;
+        position: absolute;
+        z-index: 6;
+
+        top: 86%;
+        left: 0;
+
+        width: 29%;
+        height: auto;
+
+        pointer-events: none;
+    }
+
+    /* main pale mobile cloud field */
+    .mobileCloudBg {
+        display: block;
+        position: absolute;
+        z-index: 7;
+
+        top: 43%;
+        left: 0;
+
+        width: 100%;
+        max-width: none;
+        height: auto;
+
+        pointer-events: none;
+    }
+
+    /* reversed shading over the main mobile cloud */
+    .mobileMiddleShading {
+        display: block;
+        position: absolute;
+        z-index: 7;
+
+        top: 47%;
+        left: 0;
+
+        width: 100%;
+        max-width: none;
+        height: auto;
+
+        transform: scaleX(-1);
+
+        pointer-events: none;
+    }
+
+    /* ========================================
+       MOBILE DECORATIVE ORANGES
+    ======================================== */
+
+    .orangeLeft,
+    .orangeMiddle,
+    .orangeRight {
+        display: none;
+    }
+
+    /* ========================================
+       CLICKABLE ORANGE / COUNT
+    ======================================== */
+
+    .clickOrange {
+        top: 42%;
+        left: -8%;
+        width: 43%;
+        transform: rotate(14deg);
+    }
+    /* CLICK COUNTER */
     .clickCount {
-        font-size: max(0.9cqw, 4px);
+        position: absolute;
+
+        top: 53.6%;
+        left: 2.3%;
+
+        width: 29%;
+        height: 45px;
+
+        display: block;
+        overflow: visible;
+
+        z-index: 51;
+        pointer-events: none;
+
+        opacity: 0;
+
+        transition: opacity 0.2s ease;
+    }
+
+    .clickCountVisible {
+        opacity: 1;
+    }
+
+        /* CLICKABLE ORANGE CLICK STATE */
+    .clickOrangeActive {
+        transform: rotate(20deg) scale(1.12);
+    }
+
+
+    .clickCountText {
+        font-family: var(--font-labrada), serif;
+        font-size: 16px;
+        font-weight: 600;
+
+        fill: #334356;
+    }
+
+    /* ========================================
+       MOBILE COPY
+    ======================================== */
+
+    .mobileCopy {
+        display: block;
+        position: absolute;
+
+        inset: 0;
+
+        z-index: 30;
+
+        pointer-events: none;
+    }
+
+    /* ========================================
+       MOBILE DATE
+    ======================================== */
+
+    .mobileDate {
+        position: absolute;
+
+        top: 59%;
+        left: 4%;
+
+        width: 92%;
+
+        margin: 0;
+
+        font-family: var(--font-labrada), serif;
+        font-size: 5.7vw;
+        font-weight: 600;
+    
+        line-height: 1.15;
+
+        text-align: center;
+        color: #334356;
+    }
+
+    /* ========================================
+       MOBILE DESCRIPTION
+    ======================================== */
+
+    .mobileDescription {
+        position: absolute;
+
+        top: 65.7%;
+        left: 4%;
+
+        width: 92%;
+
+        margin: 0;
+
+        font-family: var(--font-labrada), serif;
+        font-size: 3.6vw;
+        font-weight: 400;
+        line-height: 1.22;
+
+        text-align: center;
+        color: #334356;
+    }
+
+    /* ========================================
+       MOBILE BUTTONS
+    ======================================== */
+
+    .mobileActions {
+        position: absolute;
+
+        top: 72%;
+        left: 50%;
+
+        width: 63%;
+
+        transform: translateX(-50%);
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 4.2vw;
+
+        pointer-events: auto;
+    }
+
+    .mobilePrimaryButton,
+    .mobileSecondaryButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: clamp(56.5px, 13vw, 56px);
+
+        padding: 0;
+
+        border-radius: 5vw;
+
+        font-family: var(--font-labrada), serif;
+        font-size: 5.1vw;
+        font-weight:600;
+
+        
+
+        text-decoration: none;
+    }
+    .mobilePrimaryButton span,
+    .mobileSecondaryButton span {
+        transform: translateY(-1px);
+        opacity: 0.8;
+    }
+
+    .mobilePrimaryButton {
+        color: #334356;
+
+        background: #e8b466;
+        border: 1px solid #d79b43;
+
+        box-shadow:
+            0 6px 6px rgba(0, 0, 0, 0.22);
+    }
+
+    .mobileSecondaryButton {
+        color: #fffaf1;
+
+        background: rgba(51, 67, 86, 0.78);
+
+        border: 2px solid #fffaf1;
+
+        box-shadow:
+            0 6px 6px rgba(0, 0, 0, 0.22);
     }
 }

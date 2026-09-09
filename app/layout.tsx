@@ -26,7 +26,7 @@ const fraunces = Fraunces({
 const labrada = Labrada({
   variable: "--font-labrada",
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["100", "200", "300", "400", "600", "700"],
 });
 
 const geistSans = Geist({

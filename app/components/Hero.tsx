@@ -163,6 +163,46 @@ export default function Hero() {
         className={styles.orangeRight}
       />
 
+      <Image
+        src="/hero/chains2.svg"
+        alt=""
+        width={435}
+        height={451}
+        className={styles.mobileChains}
+      />
+      {/* mobile-only cloud assets */}
+      <Image
+        src="/hero/cloud-blue-left-top.svg"
+        alt=""
+        width={98}
+        height={89}
+        className={styles.mobileCloudLeftTop}
+      />
+
+      <Image
+        src="/hero/cloud-blue-right.svg"
+        alt=""
+        width={109}
+        height={108}
+        className={styles.mobileCloudRight}
+      />
+
+      <Image
+        src="/hero/cloud-blue-left-bottom.svg"
+        alt=""
+        width={190}
+        height={121}
+        className={styles.mobileCloudLeftBottom}
+      />
+
+      <Image
+        src="/hero/cloud-mobile-bg.svg"
+        alt=""
+        width={320}
+        height={258}
+        className={styles.mobileCloudBg}
+      /> 
+
       {/* rabbit + watch */}
       <div className={styles.rabbitWrap}>
         <Image
@@ -175,8 +215,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* hero copy */}
-      <div className={styles.copy}>
+      <div className={`${styles.copy} ${styles.desktopCopy}`}>
         <p className={styles.eyebrow}>
           Dream to Wonderland
         </p>
@@ -202,18 +241,43 @@ export default function Hero() {
             Register Now
           </a>
 
-          <a
-            href="#"
-            className={styles.secondaryButton}
-          >
+          <a href="#" className={styles.secondaryButton}>
             Live Site
           </a>
 
-          <a
-            href="#"
-            className={styles.secondaryButton}
-          >
+          <a href="#" className={styles.secondaryButton}>
             Devpost
+          </a>
+        </div>
+      </div>
+
+      {/* mobile-only lower copy */}
+      <div className={styles.mobileCopy}>
+        <p className={styles.mobileDate}>
+          November 21, 2026
+          <br />
+          UC Riverside - Winston Chung
+        </p>
+
+        <p className={styles.mobileDescription}>
+          A 12 hour journey where imagination meets innovation.
+        </p>
+
+        <div className={styles.mobileActions}>
+          <a
+            href="#register"
+            className={styles.mobilePrimaryButton}
+            onClick={handleRegisterClick}
+          >
+            <span>Register Now</span>
+          </a>
+
+          <a href="#" className={styles.mobileSecondaryButton}>
+            <span>Live Site</span>
+          </a>
+
+          <a href="#" className={styles.mobileSecondaryButton}>
+            <span>Devpost</span>
           </a>
         </div>
       </div>
