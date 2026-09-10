@@ -122,7 +122,7 @@ const Footer = () => {
                 key={title}
                 href={href}
                 target="_blank"
-                className="border-white-100 text-white-100 hover:from-white-100 rounded-2xl border-2 bg-linear-to-b from-blue-900 to-blue-900 px-15 py-2 text-center shadow-xl transition-colors duration-300 ease-out hover:bg-linear-to-b hover:to-blue-100 hover:text-blue-900 min-[400px]:px-20"
+                className="border-white-100 text-white-100 hover:from-white-100 rounded-2xl border-2 bg-blue-950/50 px-15 py-2 text-center shadow-xl transition-colors duration-300 ease-out hover:bg-linear-to-b hover:to-blue-100 hover:text-blue-900 min-[400px]:px-20"
               >
                 {title}
               </a>
@@ -159,8 +159,8 @@ const Footer = () => {
           height={48}
           className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-auto w-full select-none"
         />
-        <p className="font-fraunces text-md absolute inset-x-0 bottom-2 z-40 text-center text-blue-900">
-          {`© ${new Date().getFullYear()} Cutie Hack • Made with 💗 and  by ACM Hacks`}
+        <p className="font-labrada text-sm absolute inset-x-0 bottom-2 z-40 text-center text-white-100">
+          {`© ${new Date().getFullYear()} Cutie Hack • Made with 💗 and 🫖 by ACM Hacks`}
         </p>
       </div>
       {/* desktop ground */}
@@ -182,8 +182,8 @@ const Footer = () => {
             className="pointer-events-none absolute bottom-0 left-0 z-30 h-auto w-full select-none"
           />
         </div>
-        <p className="font-fraunces text-md text-white-100 absolute inset-x-0 bottom-2 z-40 text-center lg:inset-x-auto lg:right-4 lg:text-blue-900 2xl:text-xl">
-          {`© ${new Date().getFullYear()} Cutie Hack • Made with 💗 and  by ACM Hacks`}
+        <p className="font-labrada text-md text-blue-900 absolute inset-x-0 bottom-2 z-40 text-center lg:inset-x-auto lg:right-4 2xl:text-xl">
+          {`© ${new Date().getFullYear()} Cutie Hack • Made with 💗 and 🫖 by ACM Hacks`}
         </p>
       </div>
     </footer>
