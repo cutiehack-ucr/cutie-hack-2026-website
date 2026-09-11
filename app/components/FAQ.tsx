@@ -7,56 +7,56 @@ const faqItems = [
   {
     question: "What is Cutie Hack?",
     answer:
-      "A hackathon is an event where participants work together to build projects and learn new skills.",
+      "Cutie Hack is ACM at UCR’s 12 hour, beginner-friendly hackathon hosted at UC Riverside.",
   },
   {
     question: "When does Cutie Hack start/end and where does it take place?",
     answer:
-      "Cutie Hack is open to college students of different majors and experience levels.",
+      "Hacking is on November 21 at 8 AM to 8 PM at UC Riverside (Winston Chung Hall). Opening Ceremony takes place before hacking starts and Closing Ceremony occurs after hacking and judging ends.",
   },
   {
     question: "Who can come to Cutie Hack?",
     answer:
-      "No! Cutie Hack is beginner-friendly and prior coding experience is not required.",
+      "Cutie Hack is open to all years, majors, and skill levels across college students, industry professionals, etc. Engineers, designers, business enthusiasts, and more are welcome (knowing how to code prior to the hackathon is not required).",
   },
   {
     question: "What if I'm a beginner?",
     answer:
-      "No. You can also attend workshops, activities, and other hackathon events.",
+      "Prior to and throughout the day of the hackathon, we have dedicated workshops, curated resources, mentors, and more to provide beginners the opportunity to grow their skills.",
   },
   {
     question: "What if I can't code?",
     answer:
-      "You can reach out through Discord, Instagram, or email for additional information.",
+      "No problem! Beginners and non-coders alike can develop skills.",
   },
   {
     question: "Do I have to hack or make a project?",
     answer:
-      "You can reach out through Discord, Instagram, or email for additional information.",
+      "Nope! While we encourage creating a project, you're welcome to join for the workshops, activities, free food, free swag, and more!",
   },
   {
     question: "Do I need to be there when check in starts?",
     answer:
-      "You can reach out through Discord, Instagram, or email for additional information.",
+      "Nope! Hackers are allowed to check in throughout the day.",
   },
   {
     question: "Do I have to be there for judging?",
     answer:
-      "You can reach out through Discord, Instagram, or email for additional information.",
+      "The majority of your team must be present in person (Winston Chung 205/206) for judging in order to be considered for our tracks and prizes.",
   },
   {
     question: "Am I required to be there for the full time?",
     answer:
-      "You can reach out through Discord, Instagram, or email for additional information.",
+      "Nope! Hackers are allowed to work on their projects virtually, but will be required to be completely in person for judging.",
   },
   {
     question: "What if I have more questions?",
     answer:
-      "You can reach out through Discord, Instagram, or email for additional information.",
+      "Further rules can be found through Instagram, Discord, Devpost, and email.",
   },
 ];
 
-const mid = Math.ceil(faqItems.length / 2);
+const mid = 6;
 const columns = [faqItems.slice(0, mid), faqItems.slice(mid)];
 
 function Diamond() {
@@ -73,7 +73,7 @@ function Diamond() {
 }
 
 export default function FAQ() {
-  const [openKey, setOpenKey] = useState<string | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section
@@ -86,7 +86,7 @@ export default function FAQ() {
           alt=""
           width={1167}
           height={2645}
-          className="pointer-events-none absolute top-0 left-0 h-auto w-full max-w-none select-none max-lg:hidden"
+          className="pointer-events-none absolute top-0 left-1/2 h-auto w-[81vw] max-w-none -translate-x-1/2 select-none max-lg:hidden"
           priority
           aria-hidden
         />
@@ -99,12 +99,12 @@ export default function FAQ() {
           aria-hidden
         />
 
-        <div className="max-lg:from-gold-500 max-lg:to-brown-700 absolute top-full left-1/2 z-3 mt-[calc(39.29%-26.6px)] aspect-930/767 w-[min(78vw,950px)] -translate-x-1/2 max-lg:mt-[calc(36%-19.9px)] max-lg:aspect-auto max-lg:min-h-[min(300vw,1735px)] max-lg:w-[min(90vw,520px)] max-lg:rounded-xl max-lg:bg-linear-to-br">
+        <div className="max-lg:from-gold-500 max-lg:to-brown-700 absolute top-full left-1/2 z-3 mt-[calc(39.29%-26.6px)] aspect-930/767 w-[65.97vw] -translate-x-1/2 max-lg:mt-[calc(36%-19.9px)] max-lg:aspect-auto max-lg:min-h-[min(300vw,1735px)] max-lg:w-[90vw] max-lg:rounded-xl max-lg:bg-linear-to-br">
           <Image
             src="/faq/faqPanel.svg"
             alt=""
             fill
-            sizes="(max-width: 1024px) 90vw, 950px"
+            sizes="(max-width: 1024px) 90vw, 66vw"
             className="pointer-events-none object-fill max-lg:hidden"
             aria-hidden
           />
@@ -114,7 +114,7 @@ export default function FAQ() {
           />
 
           <div className="relative z-1 flex h-full flex-col px-[8%] pt-[7%] pb-[8%] max-lg:h-auto max-lg:p-6">
-            <h2 className="mb-[4%] flex shrink-0 items-center justify-center gap-[clamp(1rem,3vw,2.5rem)] leading-none">
+            <h2 className="mb-[4%] flex shrink-0 items-center justify-center gap-[clamp(16px,3vw,40px)] leading-none">
               <Diamond />
               <span className="font-fraunces text-2xl font-bold tracking-normal text-red-500 lg:text-4xl">
                 FAQ
@@ -122,39 +122,42 @@ export default function FAQ() {
               <Diamond />
             </h2>
 
-            <div className="after:bg-gold-500 relative grid min-h-0 flex-1 grid-cols-2 gap-x-[clamp(28px,4vw,64px)] gap-y-[clamp(16px,2.4vw,32px)] after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 max-lg:flex-none max-lg:grid-cols-1 max-lg:after:hidden">
-              {columns.map((col, i) => (
+            <div className="after:bg-gold-500 relative grid min-h-0 flex-1 grid-cols-2 gap-x-[clamp(16px,3.3vw,64px)] gap-y-[clamp(8px,1.7vw,32px)] after:pointer-events-none after:absolute after:inset-y-0 after:left-1/2 after:w-px after:-translate-x-1/2 max-lg:flex-none max-lg:grid-cols-1 max-lg:after:hidden">
+              {columns.map((col, colIndex) => (
                 <div
-                  key={i}
-                  className="flex flex-col gap-[clamp(10px,1.2vw,16px)]"
+                  key={colIndex}
+                  className="flex flex-col"
                 >
-                  {col.map((item) => {
-                    const isOpen = openKey === item.question;
+                  {col.map((item, itemIndex) => {
+                    const index = colIndex * mid + itemIndex;
                     return (
-                      <div key={item.question}>
+                      <div key={index}>
                         <button
                           type="button"
-                          className="font-fraunces flex w-full cursor-pointer items-start justify-between gap-[clamp(12px,1.4vw,18px)] border-none bg-transparent py-2 text-left text-2xl text-red-700"
-                          aria-expanded={isOpen}
+                          className="font-fraunces flex w-full cursor-pointer items-start justify-between gap-[1.25vw] border-none bg-transparent py-[0.56vw] text-left text-[1.528vw] text-red-700 max-lg:gap-[4.8vw] max-lg:py-2 max-lg:text-[5.2vw]"
                           onClick={() =>
-                            setOpenKey(isOpen ? null : item.question)
+                            setOpenIndex(openIndex === index ? null : index)
                           }
                         >
                           <span
                             aria-hidden
                             className="font-fraunces shrink-0 text-red-700"
                           >
-                            {isOpen ? "▴" : "▾"}
+                            {openIndex === index ? "▴" : "▾"}
                           </span>
-                          <span className="flex-1">{item.question}</span>
+                          <span className="mr-[2.22vw] flex-1 max-lg:mr-[8vw]">
+                            {item.question}
+                          </span>
                         </button>
                         <div
                           className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                            isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                            openIndex === index
+                              ? "grid-rows-[1fr]"
+                              : "grid-rows-[0fr]"
                           }`}
                         >
                           <div className="overflow-hidden">
-                            <p className="font-fraunces px-6 pt-1 pb-2.5 text-lg leading-normal text-red-500">
+                            <p className="font-labrada px-[2.43vw] pt-[0.28vw] pb-[0.69vw] text-[1.25vw] leading-normal text-red-500 max-lg:px-[6.4vw] max-lg:pt-[1.07vw] max-lg:pb-[2.67vw] max-lg:text-[4.2vw]">
                               {item.answer}
                             </p>
                           </div>
