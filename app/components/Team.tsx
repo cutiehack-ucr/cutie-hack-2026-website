@@ -45,7 +45,7 @@ export default function Team() {
             );
 
     return (
-        <section className={styles.teamSection}>
+        <section className={`${styles.teamSection} relative z-1`}>
             <h2 className={styles.teamTitle}>Team</h2>
 
             <div className={styles.teamFilters}>

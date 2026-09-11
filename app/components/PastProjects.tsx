@@ -27,7 +27,7 @@ const PastProjects = () => {
 
     return (
 
-        <section id="past-projects" className="w-full px-10 py-16 text-black">
+        <section id="past-projects" className="relative z-1 px-10 py-16 text-black">
             <h2 className="w-full text-center text-4xl font-extrabold font-sans">
                 Past Projects
             </h2>

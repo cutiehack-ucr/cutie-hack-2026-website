@@ -10,7 +10,7 @@ const Schedule = async () => {
       })) as {items? : GoogleEvent[]};
     
     return (
-        <section id="schedule" className="w-full text-black mt-6">
+        <section id="schedule" className="relative z-1 text-black mt-6">
             <h2 className="text-center text-3xl font-extrabold font-sans">Schedule</h2>
 
             <ScheduleUI eventList={items ?? []} />
