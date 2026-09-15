@@ -99,7 +99,7 @@ export default function FAQ() {
           aria-hidden
         />
 
-        <div className="max-lg:from-gold-500 max-lg:to-brown-700 absolute top-full left-1/2 z-3 mt-[calc(39.29%-26.6px)] aspect-930/767 w-[65.97vw] -translate-x-1/2 max-lg:mt-[calc(36%-19.9px)] max-lg:aspect-auto max-lg:min-h-[min(300vw,1735px)] max-lg:w-[90vw] max-lg:rounded-xl max-lg:bg-linear-to-br">
+        <div className="max-lg:from-gold-500 max-lg:to-brown-700 absolute top-full left-1/2 z-3 mt-[calc(39.29%-26.6px)] aspect-930/767 w-[65.97vw] -translate-x-1/2 max-lg:mt-[calc(36%-19.9px)] max-lg:aspect-auto max-lg:min-h-[305vw] max-lg:w-[90vw] max-lg:rounded-xl max-lg:bg-linear-to-br">
           <Image
             src="/faq/faqPanel.svg"
             alt=""
@@ -204,22 +204,62 @@ export default function FAQ() {
         className="pointer-events-none absolute -bottom-10 left-0 z-5 hidden h-auto w-screen max-w-none select-none max-lg:block"
         aria-hidden
       />
-      <Image
-        src="/faq/faq_guard_L.svg"
-        alt=""
-        width={721}
-        height={570}
-        className="pointer-events-none absolute top-[calc(35.56vw-12.5%-18px)] left-[max(-8%,calc(38%-min(39vw,310px)-clamp(90px,16vw,260px)))] z-20 h-auto w-[clamp(340px,56vw,700px)] max-w-none select-none max-lg:top-[calc(105vw-min(90.9vw,494px))] max-lg:left-5 max-lg:w-[min(115vw,625px)] max-lg:translate-x-[-19%]"
-        aria-hidden
-      />
-      <Image
-        src="/faq/faq_guard_R.svg"
-        alt=""
-        width={721}
-        height={570}
-        className="pointer-events-none absolute top-[calc(35.56vw-12.5%-18px)] right-[max(-8%,calc(38%-min(39vw,310px)-clamp(90px,16vw,260px)))] z-20 h-auto w-[clamp(340px,56vw,700px)] max-w-none select-none max-lg:top-auto max-lg:right-5 max-lg:bottom-[0%] max-lg:w-[min(115vw,625px)] max-lg:translate-x-[19%]"
-        aria-hidden
-      />
+      <div className="group pointer-events-none absolute inset-0 z-20">
+        <div
+          aria-hidden
+          className="pointer-events-auto absolute top-[12vw] right-0 left-0 h-[45vw] max-lg:hidden"
+        />
+        <div className="pointer-events-none absolute top-[16.5vw] left-[6vw] h-auto w-[26vw] max-w-none select-none max-lg:top-[27vw] max-lg:-left-[11.5vw] max-lg:w-[56vw] max-lg:rotate-5">
+          <Image
+            src="/faq/guardL.svg"
+            alt=""
+            width={721}
+            height={570}
+            className="pointer-events-none h-auto w-full"
+            aria-hidden
+          />
+          <Image
+            src="/faq/spearL.svg"
+            alt="guard left spear"
+            width={657.32}
+            height={267.78}
+            className="pointer-events-none relative bottom-[36vw] -left-[5vw] h-auto w-[50vw] max-w-none transition-transform duration-500 ease-out lg:group-hover:-translate-x-[9vw] lg:group-hover:translate-y-[4.5vw] max-lg:bottom-[75vw] max-lg:-left-[7vw] max-lg:w-[100vw]"
+            aria-hidden
+          />
+          <Image
+            src="/faq/hand.svg"
+            alt="guard left hand"
+            width={52.5}
+            height={52.5}
+            className="pointer-events-none relative max-w-none h-auto w-[5.05vw] bottom-[43.1vw] left-[1.9vw] max-lg:w-[10.9vw] max-lg:bottom-[88.7vw] max-lg:left-[4.1vw]"
+          />
+        </div>
+        <div className="pointer-events-none absolute top-[16.5vw] right-[6vw] h-auto w-[26vw] max-w-none select-none max-lg:top-auto max-lg:-bottom-[35vw] max-lg:-right-[11.5vw] max-lg:w-[56vw] max-lg:-rotate-5">
+          <Image
+            src="/faq/guardR.svg"
+            alt="guard right"
+            width={721}
+            height={570}
+            className="pointer-events-none h-auto w-full"
+            aria-hidden
+          />
+          <Image
+            src="/faq/spearR.svg"
+            alt="guard right spear"
+            width={657.32}
+            height={267.78}
+            className="pointer-events-none relative bottom-[36vw] right-[19vw] h-auto w-[50vw] max-w-none transition-transform duration-500 ease-out lg:group-hover:translate-x-[9vw] lg:group-hover:translate-y-[4.5vw] max-lg:bottom-[75vw] max-lg:right-[36vw] max-lg:w-[100vw]"
+            aria-hidden
+          />
+          <Image
+            src="/faq/hand.svg"
+            alt="guard right hand"
+            width={52.5}
+            height={52.5}
+            className="pointer-events-none relative max-w-none h-auto w-[5.05vw] bottom-[43vw] -right-[18.9vw] scale-x-[-1] max-lg:w-[10.9vw] max-lg:-right-[41vw] max-lg:bottom-[88.5vw]"
+          />
+        </div>
+      </div>
     </section>
   );
 }
