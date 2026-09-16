@@ -6,6 +6,7 @@ import Tracks from "./components/Tracks";
 import Schedule from "./components/Schedule";
 import Sponsors from "./components/Sponsors";
 import Team from "./components/Team";
+import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 export const dynamic = "force-dynamic";
 
@@ -17,9 +18,10 @@ export default function Home() {
       <About />
       <PastProjects />
       <Tracks />
-      <Schedule/>
-      <Sponsors/>
+      <Schedule />
+      <Sponsors />
       <Team />
+      <FAQ />
       <Footer />
     </main>
   );
