@@ -55,7 +55,7 @@ const SectionTitle = ({ children }: { children: string }) => (
       className="block h-5 w-auto sm:h-9"
       aria-hidden
     />
-    <span className="bg-linear-to-b from-white-100 to-orange-500 bg-clip-text text-center font-fraunces text-[22px] font-semibold tracking-normal text-transparent sm:text-[32px]">
+    <span className="from-white-100 font-fraunces bg-linear-to-b to-orange-500 bg-clip-text text-center text-[22px] font-semibold tracking-normal text-transparent sm:text-[32px]">
       {children}
     </span>
     <Image
@@ -114,7 +114,7 @@ const ValueMirrorCard = ({
         <span
           aria-hidden={showDescription}
           className={[
-            "absolute inset-0 flex items-center justify-center px-1 font-fraunces text-[length:clamp(0.65rem,3.6vw,1.25rem)] font-semibold uppercase tracking-wide text-blue-900 transition-opacity duration-700 sm:px-2",
+            "font-fraunces absolute inset-0 flex items-center justify-center px-1 text-[length:clamp(0.65rem,3.6vw,1.25rem)] font-semibold tracking-wide text-blue-900 uppercase transition-opacity duration-700 sm:px-2",
             showDescription ? "opacity-0" : "opacity-100",
           ].join(" ")}
         >
@@ -123,7 +123,7 @@ const ValueMirrorCard = ({
         <span
           aria-hidden={!showDescription}
           className={[
-            "absolute inset-0 flex items-center justify-center px-1 text-center font-labrada text-[length:clamp(0.55rem,2.6vw,0.75rem)] font-normal leading-snug text-blue-900 transition-opacity duration-700 sm:px-2 md:text-base xl:text-base",
+            "font-labrada absolute inset-0 flex items-center justify-center px-1 text-center text-[length:clamp(0.55rem,2.6vw,0.75rem)] leading-snug font-normal text-blue-900 transition-opacity duration-700 sm:px-2 md:text-base xl:text-base",
             showDescription ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
@@ -138,12 +138,12 @@ const About = () => {
   return (
     <section
       id="about"
-      className="w-full px-6 py-16 text-white-100 sm:px-14 lg:px-20"
+      className="text-white-100 w-full px-6 py-16 sm:px-14 lg:px-20"
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 xl:flex-row xl:items-start xl:justify-between xl:gap-12">
         <div className="flex w-full max-w-2xl flex-col items-center gap-8 xl:max-w-xl xl:items-start">
           <SectionTitle>About Cutie Hack</SectionTitle>
-          <div className="space-y-6 text-center font-labrada text-base leading-relaxed sm:text-lg xl:text-left xl:text-[22px]">
+          <div className="font-labrada space-y-6 text-center text-base leading-relaxed sm:text-lg xl:text-left xl:text-[22px]">
             <p>
               {ABOUT_PARAGRAPHS[0].before}
               <strong className="font-semibold">
@@ -175,10 +175,10 @@ const About = () => {
       </div>
 
       <div className="mx-auto mt-4 flex max-w-6xl flex-col items-center gap-3 xl:items-start">
-        <h3 className="bg-linear-to-b from-white-100 to-orange-500 bg-clip-text text-center font-fraunces text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] xl:text-left">
+        <h3 className="from-white-100 font-fraunces bg-linear-to-b to-orange-500 bg-clip-text text-center text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] xl:text-left">
           Our Values
         </h3>
-        <p className="text-center font-labrada text-base text-gray-100 sm:text-lg xl:text-left xl:text-[22px]">
+        <p className="font-labrada text-center text-base text-gray-100 sm:text-lg xl:text-left xl:text-[22px]">
           <span className="xl:hidden">Tap to read description!</span>
           <span className="hidden xl:inline">Click to read description!</span>
         </p>

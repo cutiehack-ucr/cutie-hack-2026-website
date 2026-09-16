@@ -65,8 +65,7 @@ const cardFlipper =
   "relative h-full w-full [transform-style:preserve-3d] transition-transform duration-500 ease-out";
 const cardFace =
   "absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";
-const cardShell =
-  "flex h-full flex-col rounded-[10px] bg-white-100 p-5";
+const cardShell = "flex h-full flex-col rounded-[10px] bg-white-100 p-5";
 const cardFrame =
   "flex min-h-0 flex-1 flex-col rounded-[8px] p-[2px] bg-[conic-gradient(from_90deg,var(--color-brown-700)_0deg,var(--color-gold-500)_360deg)]";
 const cardInner =
@@ -84,7 +83,7 @@ const RegisterHeading = () => (
       className="block h-9 w-auto"
       aria-hidden
     />
-    <span className="bg-linear-to-b from-white-100 to-orange-500 bg-clip-text font-fraunces text-[32px] font-semibold tracking-normal text-transparent">
+    <span className="from-white-100 font-fraunces bg-linear-to-b to-orange-500 bg-clip-text text-[32px] font-semibold tracking-normal text-transparent">
       Register
     </span>
     <Image
@@ -114,9 +113,7 @@ const RegisterCarousel = () => {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
         if (!visible) return;
-        const index = Number(
-          (visible.target as HTMLElement).dataset.roleSlide,
-        );
+        const index = Number((visible.target as HTMLElement).dataset.roleSlide);
         if (!Number.isNaN(index)) setActiveIndex(index);
       },
       { root, threshold: 0.55 },
@@ -133,14 +130,13 @@ const RegisterCarousel = () => {
     );
     if (!root || !slide) return;
 
-    const left =
-      slide.offsetLeft - (root.clientWidth - slide.offsetWidth) / 2;
+    const left = slide.offsetLeft - (root.clientWidth - slide.offsetWidth) / 2;
     root.scrollTo({ left, behavior: "smooth" });
   };
 
   return (
     <div className="flex w-full flex-col items-center gap-6 xl:hidden">
-      <p className="max-w-md px-2 text-center font-fraunces text-base leading-relaxed text-white-100 sm:text-lg">
+      <p className="font-fraunces text-white-100 max-w-md px-2 text-center text-base leading-relaxed sm:text-lg">
         Apply as a <strong>participant</strong>, <strong>mentor</strong>,{" "}
         <strong>judge</strong>, <strong>speaker</strong>,{" "}
         <strong>sponsor</strong>, or <strong>volunteer</strong>!
@@ -148,16 +144,16 @@ const RegisterCarousel = () => {
 
       <div
         ref={scrollerRef}
-        className="ml-[calc(50%-50vw)] flex w-screen max-w-[100vw] snap-x snap-mandatory gap-4 overflow-x-auto px-[8%] pb-2 pt-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="ml-[calc(50%-50vw)] flex w-screen max-w-[100vw] snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-[8%] pt-1 pb-2 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {roles.map((role, index) => (
           <article
             key={role.id}
             data-role-slide={index}
-            className="flex w-[84vw] shrink-0 snap-center flex-col rounded-[10px] bg-white-100 p-5 text-blue-900"
+            className="bg-white-100 flex w-[84vw] shrink-0 snap-center flex-col rounded-[10px] p-5 text-blue-900"
           >
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h3 className="font-fraunces text-xl font-semibold uppercase tracking-wide sm:text-2xl">
+              <h3 className="font-fraunces text-xl font-semibold tracking-wide uppercase sm:text-2xl">
                 {role.name}
               </h3>
               <Image
@@ -171,7 +167,7 @@ const RegisterCarousel = () => {
 
             <div className={`${cardFrame} min-h-40`}>
               <div className={`${cardInner} gap-3 p-4`}>
-                <p className="text-center font-labrada text-[18px] font-normal leading-normal tracking-normal">
+                <p className="font-labrada text-center text-[18px] leading-normal font-normal tracking-normal">
                   {role.description}
                 </p>
                 {role.applyHref && (
@@ -255,7 +251,7 @@ const Register = () => {
                 }}
                 className="aspect-[3/2] w-full cursor-pointer [perspective:1000px] focus-visible:outline-none"
               >
-                <div className="h-full w-full transition-transform duration-300 ease-out hover:scale-[1.03] [transform-style:preserve-3d]">
+                <div className="h-full w-full transition-transform duration-300 ease-out [transform-style:preserve-3d] hover:scale-[1.03]">
                   <div
                     className={[
                       cardFlipper,
@@ -266,7 +262,7 @@ const Register = () => {
                       <div className={cardShell}>
                         <div className={cardFrame}>
                           <div className={cardInner}>
-                            <div className="flex min-h-0 flex-1 items-end justify-center px-4 pb-1 pt-6">
+                            <div className="flex min-h-0 flex-1 items-end justify-center px-4 pt-6 pb-1">
                               <Image
                                 src={role.image}
                                 alt=""
@@ -275,8 +271,8 @@ const Register = () => {
                                 className="h-20 w-auto object-contain sm:h-24"
                               />
                             </div>
-                            <div className="flex shrink-0 justify-center px-4 pb-6 pt-1">
-                              <span className="font-fraunces text-xl font-semibold uppercase tracking-wide text-blue-900 sm:text-2xl">
+                            <div className="flex shrink-0 justify-center px-4 pt-1 pb-6">
+                              <span className="font-fraunces text-xl font-semibold tracking-wide text-blue-900 uppercase sm:text-2xl">
                                 {role.name}
                               </span>
                             </div>
@@ -289,7 +285,7 @@ const Register = () => {
                       <div className={cardShell}>
                         <div className={cardFrame}>
                           <div className={`${cardInner} px-4 py-3`}>
-                            <p className="min-h-0 flex-1 overflow-y-auto text-left font-labrada text-sm font-normal leading-normal tracking-normal">
+                            <p className="font-labrada min-h-0 flex-1 overflow-y-auto text-left text-sm leading-normal font-normal tracking-normal">
                               {role.description}
                             </p>
                             {role.applyHref && (
