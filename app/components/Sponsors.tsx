@@ -16,7 +16,7 @@ const Sponsors = () => {
   };
 
   return (
-    <section id="sponsors" className="mt-6 w-full text-black">
+    <section id="sponsors" className="mt-6 w-full scroll-mt-15 text-black">
       <h2 className="text-center font-sans text-3xl font-extrabold">
         Sponsors
       </h2>

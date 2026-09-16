@@ -27,40 +27,35 @@ const filterLabels: Record<TeamType, string> = {
 };
 
 export default function Team() {
-  const [selectedType, setSelectedType] = useState<TeamType>("All");
+    const [selectedType, setSelectedType] =
+        useState<TeamType>("All");
 
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+    const [selectedMember, setSelectedMember] =
+        useState<TeamMember | null>(null);
 
-  const filteredMembers =
-    selectedType === "All"
-      ? teamMembers
-      : teamMembers.filter((member) => member.team === selectedType);
+    const filteredMembers =
+        selectedType === "All"
+            ? teamMembers
+            : teamMembers.filter(
+                (member) => member.team === selectedType
+            );
 
-  return (
-    <section className={styles.teamSection}>
-      <h2 className={styles.teamTitle}>Team</h2>
+    return (
+        <section className={`${styles.teamSection} relative z-1`}>
+            <h2 className={styles.teamTitle}>Team</h2>
 
-      <div className={styles.teamFilters}>
-        {filters.map((filter) => (
-          <button
-            key={filter}
-            className={selectedType === filter ? styles.active : ""}
-            onClick={() => setSelectedType(filter)}
-          >
-            {filterLabels[filter]}
-          </button>
-        ))}
-      </div>
-
-      <div className={styles.teamGrid}>
-        {filteredMembers.map((member) => (
-          <button
-            key={member.name}
-            className={styles.teamCard}
-            onClick={() => setSelectedMember(member)}
-          >
-            <div className={styles.teamCardImage}>
-              <Image src={member.image} alt={member.name} fill sizes="120px" />
+            <div className={styles.teamFilters}>
+                {filters.map((filter) => (
+                    <button
+                        key={filter}
+                        className={
+                            selectedType === filter ? styles.active : ""
+                        }
+                        onClick={() => setSelectedType(filter)}
+                    >
+                        {filterLabels[filter]}
+                    </button>
+                ))}
             </div>
 
             <span className={styles.memberName}>{member.name}</span>

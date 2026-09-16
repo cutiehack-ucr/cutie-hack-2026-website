@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant hover (&:hover);
 
 :root {
   --background: #3d425e;
@@ -17,6 +18,7 @@
   --color-blue-900: #3d425e;
   --color-red-500: #d94f67;
   --color-red-700: #ae3e3d;
+  --color-blue-950: #334356;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-fraunces: var(--font-fraunces-family);
@@ -25,6 +27,7 @@
 
 html {
   min-height: 100%;
+  overflow-x: clip;
   background-color: var(--color-blue-900);
   background-image: linear-gradient(
     to right,
@@ -40,6 +43,7 @@ html {
 body {
   margin: 0;
   min-height: 100%;
+  overflow-x: clip;
   background: transparent;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
