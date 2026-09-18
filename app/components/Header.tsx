@@ -196,7 +196,7 @@ const Header = () => {
                 alt="Cutie Hack 2026 Logo"
                 width={66}
                 height={57}
-                className="h-auto w-[clamp(42px,4vw,66px)]"
+                className="h-auto w-[clamp(42px,4vw,66px)] z-50"
               />
             </Link>
 
@@ -325,7 +325,7 @@ const Header = () => {
             className="inline-flex shrink-0 items-center justify-center pt-2"
           >
             {menuOpen ? (
-              <span className="flex items-center justify-center">
+              <span className="flex items-center justify-center z-50">
                 <X className="size-[35px] text-blue-900" strokeWidth={1} />
               </span>
             ) : (
