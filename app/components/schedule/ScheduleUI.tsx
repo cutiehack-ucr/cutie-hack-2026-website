@@ -217,7 +217,7 @@ const ScheduleUI = ({ eventList }: Props) => {
           </p>
 
           {previousEvents.length === 0 ? (
-            <p className="text-center font-fraunces text-xl font-semibold text-blue-900 opacity-50">
+            <p className="text-center font-fraunces text-2xl font-semibold text-blue-900 opacity-50">
               No events available
             </p>
           ) : (
