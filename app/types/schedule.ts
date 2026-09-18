@@ -1,6 +1,9 @@
 interface types {
   color: string;
+  text: string;
+  border: string;
   background: string;
+  line: string;
   type: string;
 }
 
@@ -32,32 +35,47 @@ export type HackathonEvent = {
   day: string;
 };
 
-export type EventTypes = "all" | "required" | "workshop" | "activity" | "meal";
+export type EventTypes = "All" | "Required" | "Workshop" | "Activity" | "Meal";
 
 export const LABELS: Record<EventTypes, types> = {
-  all: {
-    color: "gray",
-    background: "bg-gray-500",
+  All: {
+    color: "blue-900",
+    text: "text-blue-900",
+    border: "border-blue-900",
+    background: "bg-blue-900",
+    line: "bg-blue-900",
     type: "leads",
   },
-  required: {
-    color: "red",
+  Required: {
+    color: "red-500",
+    text: "text-red-500",
+    border: "border-red-500",
     background: "bg-red-500",
+    line: "bg-red-500",
     type: "leads",
   },
-  workshop: {
-    color: "grayblue",
+  Workshop: {
+    color: "blue-500",
+    text: "text-blue-500",
+    border: "border-blue-500",
     background: "bg-blue-500",
+    line: "bg-blue-500",
     type: "hackathon",
   },
-  activity: {
-    color: "pink",
-    background: "bg-pink-500",
+  Activity: {
+    color: "orange-700",
+    text: "text-orange-700",
+    border: "border-orange-700",
+    background: "bg-orange-700",
+    line: "bg-orange-700",
     type: "hackathon",
   },
-  meal: {
-    color: "green",
-    background: "bg-green-500",
+  Meal: {
+    color: "purple-500",
+    text: "text-purple-500",
+    border: "border-purple-500",
+    background: "bg-purple-500",
+    line: "bg-purple-300",
     type: "hackathon",
   },
 };

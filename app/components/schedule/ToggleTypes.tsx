@@ -11,13 +11,17 @@ const ToggleTypes = ({ activeTypes, onToggle }: Props) => {
   const types = Object.keys(LABELS) as EventTypes[];
 
   return (
-    <div className="flex w-full flex-wrap justify-center gap-2">
+    <div className="flex w-full min-w-0 gap-2 overflow-x-auto px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:justify-between lg:gap-0 lg:overflow-visible lg:px-0">
       {types.map((type) => (
         <button
           key={type}
           type="button"
           onClick={() => onToggle(type)}
-          className={`flex-1 rounded px-3 py-1 text-black ${LABELS[type].background} ${activeTypes.has(type) ? "opacity-100" : "opacity-50"}`}
+          className={`shrink-0 whitespace-nowrap rounded-lg px-[max(12px,1.5vw)] py-0.5 shadow-md font-fraunces text-xl border-2 ${
+            activeTypes.has(type)
+              ? `${LABELS[type].background} border-white text-white`
+              : `bg-white-100 ${LABELS[type].border} ${LABELS[type].text}`
+          }`}
         >
           {type}
         </button>
