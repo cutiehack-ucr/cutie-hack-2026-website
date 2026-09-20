@@ -62,7 +62,7 @@ const roles: RoleCard[] = [
 ];
 
 const cardFlipper =
-  "relative h-full w-full [transform-style:preserve-3d] transition-transform duration-500 ease-out";
+  "relative h-full w-full rounded-[10px] [transform-style:preserve-3d] transition-transform duration-500 ease-out";
 const cardFace =
   "absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";
 const cardShell = "flex h-full flex-col rounded-[10px] bg-white-100 p-5";
@@ -70,20 +70,26 @@ const cardFrame =
   "flex min-h-0 flex-1 flex-col rounded-[8px] p-[2px] bg-[conic-gradient(from_90deg,var(--color-brown-700)_0deg,var(--color-gold-500)_360deg)]";
 const cardInner =
   "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[6px] bg-linear-to-b from-white-100 to-gray-100";
+const registerShadow =
+  "shadow-[0_8px_4px_0_rgba(0,0,0,0.25)]";
+const registerDropShadow =
+  "drop-shadow-[0_8px_4px_rgba(0,0,0,0.25)]";
+const registerButtonShadow =
+  "shadow-[0_2.13px_4.26px_0_rgba(0,0,0,0.25)]";
 const applyButton =
-  "inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-semibold shadow-md transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500";
+  `inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-normal ${registerButtonShadow} transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500`;
 
 const RegisterHeading = () => (
-  <h2 className="flex items-center gap-10 leading-none">
+  <h2 className="flex items-center gap-10 pb-3">
     <Image
       src="/diamond.svg"
       alt=""
       width={43}
       height={48}
-      className="block h-9 w-auto"
+      className={`block h-9 w-auto ${registerDropShadow}`}
       aria-hidden
     />
-    <span className="from-white-100 font-fraunces bg-linear-to-b to-orange-500 bg-clip-text text-[32px] font-semibold tracking-normal text-transparent">
+    <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-[32px] font-semibold leading-normal tracking-normal text-transparent [text-shadow:0_8px_4px_rgba(0,0,0,0.25)]">
       Register
     </span>
     <Image
@@ -91,7 +97,7 @@ const RegisterHeading = () => (
       alt=""
       width={43}
       height={48}
-      className="block h-9 w-auto"
+      className={`block h-9 w-auto ${registerDropShadow}`}
       aria-hidden
     />
   </h2>
@@ -135,7 +141,7 @@ const RegisterCarousel = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center gap-6 xl:hidden">
+    <div className="flex w-full flex-col items-center gap-6 md:hidden">
       <p className="font-fraunces text-white-100 max-w-md px-2 text-center text-base leading-relaxed sm:text-lg">
         Apply as a <strong>participant</strong>, <strong>mentor</strong>,{" "}
         <strong>judge</strong>, <strong>speaker</strong>,{" "}
@@ -144,13 +150,13 @@ const RegisterCarousel = () => {
 
       <div
         ref={scrollerRef}
-        className="ml-[calc(50%-50vw)] flex w-screen max-w-[100vw] snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-[8%] pt-1 pb-2 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="ml-[calc(50%-50vw)] flex w-screen max-w-[100vw] snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-[8%] pt-1 pb-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {roles.map((role, index) => (
           <article
             key={role.id}
             data-role-slide={index}
-            className="bg-white-100 flex w-[84vw] shrink-0 snap-center flex-col rounded-[10px] p-5 text-blue-900"
+            className={`bg-white-100 flex w-[84vw] shrink-0 snap-center flex-col rounded-[10px] p-5 text-blue-900 ${registerShadow}`}
           >
             <div className="mb-4 flex items-center justify-between gap-3">
               <h3 className="font-fraunces text-xl font-semibold tracking-wide uppercase sm:text-2xl">
@@ -166,8 +172,8 @@ const RegisterCarousel = () => {
             </div>
 
             <div className={`${cardFrame} min-h-40`}>
-              <div className={`${cardInner} gap-3 p-4`}>
-                <p className="font-labrada text-center text-[18px] leading-normal font-normal tracking-normal">
+              <div className={`${cardInner} gap-3`}>
+                <p className="font-labrada px-2 pt-2 text-center text-base leading-normal font-normal tracking-normal">
                   {role.description}
                 </p>
                 {role.applyHref && (
@@ -175,7 +181,7 @@ const RegisterCarousel = () => {
                     href={role.applyHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${applyButton} mt-auto h-10 w-full text-sm sm:text-base`}
+                    className={`${applyButton} mx-4 mb-4 mt-auto h-10 text-sm sm:text-base`}
                   >
                     Apply as {role.name}
                   </a>
@@ -223,14 +229,39 @@ const Register = () => {
   return (
     <section
       id="register"
-      className="w-full px-6 py-16 text-black sm:px-14 lg:px-20"
+      className="relative z-0 w-full overflow-visible px-6 py-16 text-blue-900 sm:px-14 lg:px-20"
     >
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-8 xl:gap-16">
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 z-0 w-[100%] max-w-none -translate-x-1/2 -translate-y-[1%] xl:hidden"
+        aria-hidden
+      >
+        <Image
+          src="/ray_mobile.svg"
+          alt=""
+          width={320}
+          height={2816}
+          className="h-auto w-full max-w-none"
+        />
+      </div>
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 z-0 hidden w-[105%] max-w-none -translate-x-1/2 -translate-y-[2%] xl:block"
+        aria-hidden
+      >
+        <Image
+          src="/ray_desktop.svg"
+          alt=""
+          width={1440}
+          height={3010}
+          className="h-auto w-full max-w-none"
+        />
+      </div>
+
+      <div className="relative z-1 mx-auto flex w-full max-w-6xl flex-col items-center gap-8 xl:gap-16">
         <RegisterHeading />
 
         <RegisterCarousel />
 
-        <div className="hidden w-full grid-cols-1 gap-x-20 gap-y-16 xl:grid xl:grid-cols-3">
+        <div className="hidden w-full grid-cols-2 gap-x-8 gap-y-10 md:grid xl:grid-cols-3 xl:gap-x-20 xl:gap-y-16">
           {roles.map((role) => {
             const isFlipped = flippedIds.has(role.id);
 
@@ -251,10 +282,11 @@ const Register = () => {
                 }}
                 className="aspect-[3/2] w-full cursor-pointer [perspective:1000px] focus-visible:outline-none"
               >
-                <div className="h-full w-full transition-transform duration-300 ease-out [transform-style:preserve-3d] hover:scale-[1.03]">
+                <div className="h-full w-full rounded-[10px] transition-transform duration-300 ease-out [transform-style:preserve-3d] hover:scale-[1.03]">
                   <div
                     className={[
                       cardFlipper,
+                      registerShadow,
                       isFlipped ? "[transform:rotateY(180deg)]" : "",
                     ].join(" ")}
                   >
@@ -268,7 +300,9 @@ const Register = () => {
                                 alt=""
                                 width={90}
                                 height={103}
-                                className="h-20 w-auto object-contain sm:h-24"
+                                className={`h-20 w-auto object-contain sm:h-24${
+                                  role.id === "mentor" ? " translate-y-4" : ""
+                                }`}
                               />
                             </div>
                             <div className="flex shrink-0 justify-center px-4 pt-1 pb-6">
@@ -284,8 +318,8 @@ const Register = () => {
                     <div className={`${cardFace} [transform:rotateY(180deg)]`}>
                       <div className={cardShell}>
                         <div className={cardFrame}>
-                          <div className={`${cardInner} px-4 py-3`}>
-                            <p className="font-labrada min-h-0 flex-1 overflow-y-auto text-left text-sm leading-normal font-normal tracking-normal">
+                          <div className={cardInner}>
+                            <p className="font-labrada min-h-0 flex-1 overflow-y-auto px-2 pt-2 text-left text-sm leading-normal font-normal tracking-normal xl:text-[15.5px]">
                               {role.description}
                             </p>
                             {role.applyHref && (
@@ -295,7 +329,7 @@ const Register = () => {
                                 rel="noopener noreferrer"
                                 onClick={(event) => event.stopPropagation()}
                                 onKeyDown={(event) => event.stopPropagation()}
-                                className={`${applyButton} mt-2 h-8 w-48 self-end px-3 text-center text-xs sm:text-sm`}
+                                className={`${applyButton} mx-4 mb-3 mt-2 h-8 w-48 self-end px-3 text-center text-xs sm:text-sm`}
                               >
                                 Apply as {role.name}
                               </a>
