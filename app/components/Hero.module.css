@@ -19,6 +19,21 @@
     color: #fffaf1;
 }
 
+.rectangleGradient {
+    display: block;
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 1;
+    pointer-events: none;
+}
+
 /* ========================================
    DARK LOWER SHADING
 ======================================== */
@@ -30,8 +45,8 @@
     left: -1;
     bottom: 2.8%;
 
-    width:27.7%;
-    
+    width: 27.7%;
+
 
     pointer-events: none;
 }
@@ -133,7 +148,7 @@
     bottom: 10%;
 
     width: 57.5%;
-    
+
 
     pointer-events: none;
 }
@@ -146,10 +161,11 @@
     position: absolute;
     z-index: 9;
 
-    
-    left: 23.7%;
 
-    width: 38.5%;
+    left: 24%;
+    top: 0%;
+
+    width: 38%;
 
     pointer-events: none;
 }
@@ -173,37 +189,42 @@
     font-size: 2.68cqw;
     font-weight: 400;
     line-height: 1.21;
-    color: #ffdc98;
-   
 
-    text-shadow:
-        0.1 0.50cqw 4 #334356d2,
-        0 0.20cqw 0.04cqw rgba(35, 48, 62, 0.35);
+    background: linear-gradient(180deg,
+            #FAF8F1 0%,
+            #F6B74E 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 0.20cqw 0.08cqw rgba(51, 67, 86, 0.75));
 }
-
 
 .title {
     margin: 0;
-
     font-family: var(--font-griffy), serif;
     font-size: 5.37cqw;
     font-weight: 400;
     line-height: 1.15;
-
     white-space: nowrap;
-    color: #ffdc98;
 
-    text-shadow:
-        
-        0.1 0.50cqw 5.5 #334356,
-        0 0.38cqw 0.30cqw rgba(20, 31, 43, 0.42);
+    background: linear-gradient(180deg,
+            #FAF8F1 0%,
+            #F6B74E 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter: drop-shadow(0 0.30cqw 0.10cqw rgba(51, 67, 86, 0.8));
 }
 
 .date {
     margin: 0.55cqw 0 0;
 
-    font-family: var(--font-labrada), serif;
-    font-size: 2.14cqw;
+    font-family: var(--font-fraunces), serif;
+    font-size: 1.88cqw;
     font-weight: 400;
     line-height: 1.21;
 
@@ -219,14 +240,14 @@
     margin: 1.05cqw 0 0;
 
     font-family: var(--font-labrada), serif;
-    font-size: 1.52cqw;
+    font-size: 1.49cqw;
     font-weight: 400;
     line-height: 1.21;
     color: #fffaf1;
 
     text-shadow:
-            0.1 0.50cqw 4 #334356d2,
-            0 0.20cqw 0.04cqw rgba(35, 48, 62, 0.35);
+        0.1 0.50cqw 4 #334356d2,
+        0 0.20cqw 0.04cqw rgba(35, 48, 62, 0.35);
 }
 
 /* ========================================
@@ -238,6 +259,7 @@
     gap: 1.3cqw;
     margin-top: 2cqw;
 }
+
 .primaryButton,
 .secondaryButton {
     display: inline-flex;
@@ -248,7 +270,7 @@
     padding: 0 1.25cqw;
     border-radius: 0.65cqw;
 
-    font-family: var(--font-labrada), serif;
+    font-family: var(--font-fraunces), serif;
     font-size: 1.35cqw;
 
 
@@ -303,21 +325,28 @@
    COUNTDOWN
 ======================================== */
 
+/* ========================================
+   COUNTDOWN
+======================================== */
+
 .countdown {
     position: absolute;
     z-index: 22;
 
-    top: 49%;
-    left: 35%;
+    top: 47.6%;
+    left: 70%;
 
-    width: 46%;
+    width: 20.5%;
 
     transform: translate(-50%, -50%);
 
     text-align: center;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--font-fraunces), serif;
+    font-weight: 400;
     color: #334356;
+
+    pointer-events: none;
 }
 
 .numberRow {
@@ -327,8 +356,10 @@
 
     white-space: nowrap;
 
-    font-size: 2.7cqw;
-    line-height: 0.95;
+    font-size: 3.5cqw;
+    font-weight: 350;
+    line-height: 1;
+    letter-spacing: 0;
 }
 
 .numberRow>span:nth-child(even) {
@@ -340,10 +371,10 @@
     grid-template-columns: repeat(4, 1fr);
 
     width: 100%;
+    margin-top: 0.15cqw;
 
-    margin-top: 0.26cqw;
-
-    font-size: 1.1cqw;
+    font-size: 2cqw;
+    font-weight: 400;
     line-height: 1;
 }
 
@@ -459,17 +490,22 @@
 .clickOrangeActive {
     transform: scale(1.12);
 }
+
 .mobileCloudLeftTop,
 .mobileCloudRight,
 .mobileCloudLeftBottom,
 .mobileCloudBg,
 .mobileMiddleShading,
+.mobileCopy,
+.mobileRectangleGradient,
 .mobileChains {
     display: none;
 }
+
 .mobileCopy {
     display: none;
 }
+
 
 
 /* ========================================
@@ -484,16 +520,33 @@
         display: none;
     }
 
+    .rectangleGradient {
+        display: none;
+    }
+
     .hero {
+
         position: relative;
 
         width: 100%;
         aspect-ratio: 320 / 710;
+        background: #334356;
 
         height: auto;
         min-height: 0;
 
         overflow: hidden;
+    }
+
+    .mobileRectangleGradient {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        z-index: 2;
+        pointer-events: none;
     }
 
     /* ========================================
@@ -524,17 +577,12 @@
 
         top: 9.4%;
         left: 0;
-
         width: 100%;
 
         margin: 0;
 
         font-size: 5.4vw;
         line-height: 1.1;
-
-        text-shadow:
-            0.1cqw 1.20cqw 0.27cqw #334356,
-            0 0.38cqw 0.30cqw rgba(20, 31, 43, 0.42);
     }
 
     .title {
@@ -542,7 +590,6 @@
 
         top: 13%;
         left: 0;
-
         width: 100%;
 
         margin: 0;
@@ -551,10 +598,6 @@
         line-height: 1.05;
 
         white-space: nowrap;
-
-        text-shadow:
-            0.1cqw 1.40cqw 0.27cqw #334356,
-            0 0.38cqw 0.30cqw rgba(20, 31, 43, 0.42);
     }
 
     /* ========================================
@@ -699,6 +742,31 @@
         display: none;
     }
 
+     /* ========================================
+       COUNTDOWN
+    ======================================== */
+
+    .countdown {
+        top: 42.3%;
+        left: 45.1%;
+
+        width: 47%;
+
+        transform: translate(-50%, -50%);
+
+        z-index: 22;
+    }
+
+    .numberRow {
+        font-size: 8.6vw;
+        line-height: 0.95;
+    }
+
+    .labelRow {
+        font-size: 4.6vw;
+        margin-top: 1vw;
+    }
+
     /* ========================================
        CLICKABLE ORANGE / COUNT
     ======================================== */
@@ -709,6 +777,7 @@
         width: 43%;
         transform: rotate(14deg);
     }
+
     /* CLICK COUNTER */
     .clickCount {
         position: absolute;
@@ -734,7 +803,7 @@
         opacity: 1;
     }
 
-        /* CLICKABLE ORANGE CLICK STATE */
+    /* CLICKABLE ORANGE CLICK STATE */
     .clickOrangeActive {
         transform: rotate(20deg) scale(1.12);
     }
@@ -777,10 +846,10 @@
 
         margin: 0;
 
-        font-family: var(--font-labrada), serif;
+        font-family: var(--font-fraunces), serif;
         font-size: 5.7vw;
         font-weight: 600;
-    
+
         line-height: 1.15;
 
         text-align: center;
@@ -845,14 +914,15 @@
 
         border-radius: 5vw;
 
-        font-family: var(--font-labrada), serif;
+        font-family: var(--font-fraunces), serif;
         font-size: 5.1vw;
-        font-weight:600;
+        font-weight: 600;
 
-        
+
 
         text-decoration: none;
     }
+
     .mobilePrimaryButton span,
     .mobileSecondaryButton span {
         transform: translateY(-1px);

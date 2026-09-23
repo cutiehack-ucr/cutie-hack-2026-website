@@ -8,6 +8,12 @@ export default function Hero() {
   const [clickCount, setClickCount] = useState(0);
   const [showClickCount, setShowClickCount] = useState(false);
   const [orangeClicked, setOrangeClicked] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const savedCount = localStorage.getItem("cutieHackOrangeClicks");
@@ -15,6 +21,42 @@ export default function Hero() {
     if (savedCount !== null) {
       setClickCount(Number(savedCount));
     }
+  }, []);
+  useEffect(() => {
+    const targetDate = new Date("2026-11-21T00:00:00-08:00");
+
+    const updateCountdown = () => {
+      const difference = targetDate.getTime() - Date.now();
+
+      if (difference <= 0) {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        });
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor(
+          (difference / (1000 * 60 * 60)) % 24
+        ),
+        minutes: Math.floor(
+          (difference / (1000 * 60)) % 60
+        ),
+        seconds: Math.floor(
+          (difference / 1000) % 60
+        ),
+      });
+    };
+
+    updateCountdown();
+
+    const interval = window.setInterval(updateCountdown, 1000);
+
+    return () => window.clearInterval(interval);
   }, []);
 
   const handleOrangeClick = () => {
@@ -80,6 +122,24 @@ export default function Hero() {
         width={969}
         height={353}
         className={styles.cloudMain}
+      />
+
+      {/* Background Gradient */}
+      <Image
+        src="/hero/rectangle-gradient.svg"
+        alt=""
+        width={1807.83}
+        height={1188}
+        className={styles.rectangleGradient}
+      />
+
+      {/* Mobile Background Gradient */}
+      <Image
+        src="/hero/mobile-rectangle-gradient.svg"
+        alt=""
+        width={1807.83}
+        height={1188}
+        className={styles.mobileRectangleGradient}
       />
 
       {/* blue cloud behind left oranges */}
@@ -214,6 +274,25 @@ export default function Hero() {
           className={styles.rabbit}
         />
       </div>
+      {/* live countdown */}
+      <div className={styles.countdown}>
+        <div className={styles.numberRow}>
+          <span>{String(timeLeft.days).padStart(2, "0")}</span>
+          <span>:</span>
+          <span>{String(timeLeft.hours).padStart(2, "0")}</span>
+          <span>:</span>
+          <span>{String(timeLeft.minutes).padStart(2, "0")}</span>
+          <span>:</span>
+          <span>{String(timeLeft.seconds).padStart(2, "0")}</span>
+        </div>
+
+        <div className={styles.labelRow}>
+          <span>days</span>
+          <span>hrs</span>
+          <span>mins</span>
+          <span>secs</span>
+        </div>
+      </div>
 
       <div className={`${styles.copy} ${styles.desktopCopy}`}>
         <p className={styles.eyebrow}>
@@ -245,7 +324,12 @@ export default function Hero() {
             Live Site
           </a>
 
-          <a href="#" className={styles.secondaryButton}>
+          <a
+            href="https://cutie-hack-2026.devpost.com/"
+            className={styles.secondaryButton}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Devpost
           </a>
         </div>
@@ -276,7 +360,12 @@ export default function Hero() {
             <span>Live Site</span>
           </a>
 
-          <a href="#" className={styles.mobileSecondaryButton}>
+          <a
+            href="https://cutie-hack-2026.devpost.com/"
+            className={styles.mobileSecondaryButton}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <span>Devpost</span>
           </a>
         </div>
