@@ -52,17 +52,17 @@ const socialLinks = [
   {
     href: "https://www.instagram.com/cutiehack_ucr/",
     label: "Instagram",
-    icon: FaInstagram,
+    icon: "/header/instaSocial.svg",
   },
   {
     href: "https://www.discord.gg/33JTAhGHuu",
     label: "Discord",
-    icon: FaDiscord,
+    icon: "/header/discordSocial.svg",
   },
   {
     href: "mailto:cutiehack@gmail.com",
     label: "Email",
-    icon: FaRegEnvelope,
+    icon: "/header/emailSocial.svg",
   },
 ];
 
@@ -260,39 +260,49 @@ const Header = () => {
                   </Link>
                 );
               })}
+            </nav>
+
+            <div className="flex shrink-0 items-center gap-[clamp(8px,2.8vw,100px)]">
               <div className="from-gold-500 to-brown-700 rounded-[12px] bg-gradient-to-b p-[1.5px]">
                 <a
                   href="https://athena-wheat.vercel.app/cutiehack/live/dashboard"
                   target="_blank"
-                  className="bg-white-100 hover:bg-gold-500 inline-flex items-center rounded-[10px] px-[clamp(8px,0.8vw,12px)] py-[clamp(4px,0.5vw,8px)] whitespace-nowrap duration-300 ease-out"
+                  className="bg-white-100 hover:bg-gold-500 inline-flex items-center rounded-[10.5px] px-[1vw] py-[5px] text-[clamp(18px,1.5vw,22px)] whitespace-nowrap duration-300 ease-out"
                 >
                   Dashboard
                 </a>
               </div>
-            </nav>
 
-            <div
-              className="from-gold-500 to-brown-700 h-12 w-[3px] shrink-0 bg-gradient-to-b"
-              aria-hidden="true"
-            />
+              <div
+               className="from-gold-500 to-brown-700 h-12 w-[2px] shrink-0 bg-gradient-to-b"
+                aria-hidden="true"
+              />
 
-            <div className="flex shrink-0 items-center justify-end gap-[clamp(6px,1.2vw,20px)]">
-              {socialLinks.map(({ href, label, icon: Icon }) => {
-                const isMail = href.startsWith("mailto:");
+              <div className="flex items-center justify-end gap-[clamp(6px,1.2vw,20px)]">
+                {socialLinks.map(({ href, label, icon }) => {
+                  const isMail = href.startsWith("mailto:");
 
-                return (
-                  <a
-                    key={label}
-                    href={href}
-                    target={isMail ? undefined : "_blank"}
-                    rel={isMail ? undefined : "noopener noreferrer"}
-                    aria-label={label}
-                    className="inline-flex items-center justify-center text-blue-900 transition-transform duration-300 ease-out hover:scale-110"
-                  >
-                    <Icon className="size-[clamp(20px,2.4vw,35px)]" />
-                  </a>
-                );
-              })}
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      target={isMail ? undefined : "_blank"}
+                      rel={isMail ? undefined : "noopener noreferrer"}
+                      aria-label={label}
+                      className="inline-flex items-center justify-center text-blue-900 transition-transform duration-300 ease-out hover:scale-110"
+                    >
+                      {/*<Icon className="size-[clamp(20px,2.4vw,35px)]" />*/}
+                      <Image
+                        src={icon}
+                        alt={icon}
+                        height={50}
+                        width={50}
+                        className="h-auto w-[2.5vw]"
+                      />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -444,7 +454,7 @@ const Header = () => {
               </a>
             </nav>
             <div className="flex shrink-0 items-center gap-4 px-6 pb-4">
-              {socialLinks.map(({ href, label, icon: Icon }) => {
+              {socialLinks.map(({ href, label, icon }) => {
                 const isMail = href.startsWith("mailto:");
 
                 return (
@@ -456,7 +466,13 @@ const Header = () => {
                     aria-label={label}
                     className="inline-flex items-center justify-center text-blue-900"
                   >
-                    <Icon className="size-7" />
+                    <Image
+                      src={icon}
+                      alt={icon}
+                      height={10}
+                      width={10}
+                      className="h-auto w-[7.5vw]"
+                    />
                   </a>
                 );
               })}
