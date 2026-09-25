@@ -5,6 +5,7 @@ import PastProjects from "./components/PastProjects";
 import Tracks from "./components/Tracks";
 import Schedule from "./components/Schedule";
 import Sponsors from "./components/Sponsors";
+import Industry from "./components/Industry";
 import Team from "./components/Team";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
       <Tracks />
       <Schedule />
       <Sponsors />
+      <Industry />
       <Team />
       <FAQ />
       <Footer />
