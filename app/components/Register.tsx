@@ -7,7 +7,6 @@ type RoleCard = {
   id: string;
   name: string;
   description: string;
-  image: string;
   applyHref?: string;
 };
 
@@ -15,7 +14,6 @@ const roles: RoleCard[] = [
   {
     id: "participant",
     name: "Participant",
-    image: "/register/participant.svg",
     description:
       "Participants can build with the freedom of their creativity across a variety of fields from software, hardware, AI/ML, data science, AR/VR, game development, and more!",
     applyHref: "https://athena-wheat.vercel.app/cutiehack/forms/participant",
@@ -23,7 +21,6 @@ const roles: RoleCard[] = [
   {
     id: "mentor",
     name: "Mentor",
-    image: "/register/mentor.svg",
     description:
       "Meet a variety of hackers across engineering, design, and more. Guide hackers by providing project insight and advice.",
     applyHref: "https://www.google.com",
@@ -31,7 +28,6 @@ const roles: RoleCard[] = [
   {
     id: "judge",
     name: "Judge",
-    image: "/register/judge.svg",
     description:
       "Industry professionals, researchers, and more that assess innovative hacker projects based on idea, value, technical complexity, feasibility, and scalability across hackathon tracks.",
     applyHref: "https://www.google.com",
@@ -39,7 +35,6 @@ const roles: RoleCard[] = [
   {
     id: "speaker",
     name: "Speaker",
-    image: "/register/speaker.svg",
     description:
       "Help teach hackers technical and professional development skills. Answer questions and provide insight into career growth, fields, and more.",
     applyHref: "https://www.google.com",
@@ -47,14 +42,12 @@ const roles: RoleCard[] = [
   {
     id: "sponsor",
     name: "Sponsor",
-    image: "/register/sponsor.svg",
     description:
       "Companies and individuals that want to help Cutie Hack come to life through monetary support, food, swag, digital credits, and more! If you are interested in contributing, contact us at cutiehack@gmail.com.",
   },
   {
     id: "volunteer",
     name: "Volunteer",
-    image: "/register/volunteer.svg",
     description:
       "Help out our organizing team directly on the day of the hackathon through shifts, including answering general inquiries from hackers, distributing meals, and more.",
     applyHref: "https://athena-wheat.vercel.app/cutiehack/forms/volunteer",
@@ -62,16 +55,9 @@ const roles: RoleCard[] = [
 ];
 
 const cardFlipper =
-  "relative h-full w-full rounded-[10px] [transform-style:preserve-3d] transition-transform duration-500 ease-out";
+  "relative h-full w-full [transform-style:preserve-3d] transition-transform duration-500 ease-out";
 const cardFace =
   "absolute inset-0 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";
-const cardShell = "flex h-full flex-col rounded-[10px] bg-white-100 p-5";
-const cardFrame =
-  "flex min-h-0 flex-1 flex-col rounded-[8px] p-[2px] bg-[conic-gradient(from_90deg,var(--color-brown-700)_0deg,var(--color-gold-500)_360deg)]";
-const cardInner =
-  "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[6px] bg-linear-to-b from-white-100 to-gray-100";
-const registerShadow =
-  "shadow-[0_8px_4px_0_rgba(0,0,0,0.25)]";
 const registerDropShadow =
   "drop-shadow-[0_8px_4px_rgba(0,0,0,0.25)]";
 const registerButtonShadow =
@@ -80,7 +66,7 @@ const applyButton =
   `inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-normal ${registerButtonShadow} transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500`;
 
 const RegisterHeading = () => (
-  <h2 className="flex items-center gap-10 pb-3">
+  <h2 className="flex items-center gap-10 pb-1 md:pb-3">
     <Image
       src="/diamond.svg"
       alt=""
@@ -105,6 +91,13 @@ const RegisterHeading = () => (
 
 const RegisterCarousel = () => {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef(0);
+  const dragRef = useRef({
+    active: false,
+    startX: 0,
+    scrollLeft: 0,
+    moved: false,
+  });
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -137,12 +130,92 @@ const RegisterCarousel = () => {
     if (!root || !slide) return;
 
     const left = slide.offsetLeft - (root.clientWidth - slide.offsetWidth) / 2;
-    root.scrollTo({ left, behavior: "smooth" });
+    const start = root.scrollLeft;
+    const change = left - start;
+    cancelAnimationFrame(frameRef.current);
+    if (Math.abs(change) < 1) {
+      root.style.scrollSnapType = "";
+      return;
+    }
+
+    root.style.scrollSnapType = "none";
+    const duration = Math.min(900, Math.max(560, Math.abs(change) * 1.6));
+    const startTime = performance.now();
+
+    const step = (now: number) => {
+      const t = Math.min(1, (now - startTime) / duration);
+      const eased =
+        t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+      root.scrollLeft = start + change * eased;
+      if (t < 1) {
+        frameRef.current = requestAnimationFrame(step);
+        return;
+      }
+      root.style.scrollSnapType = "";
+    };
+
+    frameRef.current = requestAnimationFrame(step);
+  };
+
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const target = event.target;
+    if (target instanceof Element && target.closest("a, button")) return;
+    event.preventDefault();
+    cancelAnimationFrame(frameRef.current);
+    const root = event.currentTarget;
+    dragRef.current = {
+      active: true,
+      startX: event.clientX,
+      scrollLeft: root.scrollLeft,
+      moved: false,
+    };
+    root.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag.active) return;
+    const root = event.currentTarget;
+    const delta = event.clientX - drag.startX;
+    if (Math.abs(delta) > 4) drag.moved = true;
+    if (!drag.moved) return;
+    root.style.cursor = "grabbing";
+    root.style.scrollSnapType = "none";
+    root.scrollLeft = drag.scrollLeft - delta;
+  };
+
+  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const drag = dragRef.current;
+    if (!drag.active) return;
+    const root = event.currentTarget;
+    const moved = drag.moved;
+    drag.active = false;
+    if (root.hasPointerCapture(event.pointerId)) {
+      root.releasePointerCapture(event.pointerId);
+    }
+    root.style.cursor = "";
+    if (!moved) return;
+
+    const slides = [...root.querySelectorAll<HTMLElement>("[data-role-slide]")];
+    const center = root.scrollLeft + root.clientWidth / 2;
+    const nearest = slides.reduce((closest, slide, index) => {
+      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+      const closestCenter =
+        slides[closest].offsetLeft + slides[closest].offsetWidth / 2;
+      return Math.abs(slideCenter - center) < Math.abs(closestCenter - center)
+        ? index
+        : closest;
+    }, 0);
+    goTo(nearest);
+    requestAnimationFrame(() => {
+      drag.moved = false;
+    });
   };
 
   return (
     <div className="flex w-full flex-col items-center gap-6 md:hidden">
-      <p className="font-fraunces text-white-100 max-w-md px-2 text-center text-base leading-relaxed sm:text-lg">
+      <p className="font-fraunces text-white-100 mb-6 max-w-md px-2 text-center text-base leading-relaxed sm:text-lg">
         Apply as a <strong>participant</strong>, <strong>mentor</strong>,{" "}
         <strong>judge</strong>, <strong>speaker</strong>,{" "}
         <strong>sponsor</strong>, or <strong>volunteer</strong>!
@@ -150,49 +223,51 @@ const RegisterCarousel = () => {
 
       <div
         ref={scrollerRef}
-        className="ml-[calc(50%-50vw)] flex w-screen max-w-[100vw] snap-x snap-mandatory [scrollbar-width:none] gap-4 overflow-x-auto px-[8%] pt-1 pb-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        onDragStart={(event) => event.preventDefault()}
+        onClickCapture={(event) => {
+          if (!dragRef.current.moved) return;
+          event.preventDefault();
+          event.stopPropagation();
+        }}
+        className="-mx-6 flex w-[calc(100%+3rem)] cursor-grab snap-x snap-proximity select-none [-webkit-user-drag:none] [scrollbar-width:none] gap-4 overflow-x-auto px-[calc((100%-min(84vw,280px))/2)] pt-1 pb-1 [-ms-overflow-style:none] active:cursor-grabbing sm:-mx-14 sm:w-[calc(100%+7rem)] [&::-webkit-scrollbar]:hidden [&_img]:pointer-events-none [&_img]:[-webkit-user-drag:none]"
       >
         {roles.map((role, index) => (
           <article
             key={role.id}
             data-role-slide={index}
-            className={`bg-white-100 flex w-[84vw] shrink-0 snap-center flex-col rounded-[10px] p-5 text-blue-900 ${registerShadow}`}
+            className="relative w-[84vw] max-w-[280px] shrink-0 snap-center"
           >
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <h3 className="font-fraunces text-xl font-semibold tracking-wide uppercase sm:text-2xl">
-                {role.name}
-              </h3>
-              <Image
-                src={role.image}
-                alt=""
-                width={90}
-                height={103}
-                className="h-16 w-auto shrink-0 object-contain sm:h-20"
-              />
-            </div>
-
-            <div className={`${cardFrame} min-h-40`}>
-              <div className={`${cardInner} gap-3`}>
-                <p className="font-labrada px-2 pt-2 text-center text-base leading-normal font-normal tracking-normal">
-                  {role.description}
-                </p>
-                {role.applyHref && (
-                  <a
-                    href={role.applyHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${applyButton} mx-4 mb-4 mt-auto h-10 text-sm sm:text-base`}
-                  >
-                    Apply as {role.name}
-                  </a>
-                )}
-              </div>
-            </div>
+            <Image
+              src={`/register/mobile/${role.name}.svg`}
+              alt=""
+              width={240}
+              height={301}
+              draggable={false}
+              onDragStart={(event) => event.preventDefault()}
+              className="pointer-events-none h-auto w-full select-none [-webkit-user-drag:none]"
+            />
+            <p className="sr-only">
+              {role.name}. {role.description}
+            </p>
+            {role.applyHref && (
+              <a
+                href={role.applyHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${applyButton} absolute bottom-[12%] left-[13%] right-[13%] h-10 rounded-[10px]! text-base sm:text-lg`}
+              >
+                Apply as {role.name}
+              </a>
+            )}
           </article>
         ))}
       </div>
 
-      <div className="flex items-center justify-center gap-2.5" role="tablist">
+      <div className="-mt-3 flex items-center justify-center gap-2.5" role="tablist">
         {roles.map((role, index) => (
           <button
             key={role.id}
@@ -202,7 +277,7 @@ const RegisterCarousel = () => {
             aria-selected={activeIndex === index}
             onClick={() => goTo(index)}
             className={[
-              "h-2.5 w-2.5 rounded-full transition",
+              "h-4 w-4 rounded-full transition",
               activeIndex === index
                 ? "bg-white"
                 : "border border-white bg-transparent",
@@ -256,7 +331,7 @@ const Register = () => {
         />
       </div>
 
-      <div className="relative z-1 mx-auto flex w-full max-w-6xl flex-col items-center gap-8 xl:gap-16">
+      <div className="relative z-1 mx-auto flex w-full max-w-6xl flex-col items-center gap-6 md:gap-8 xl:gap-16">
         <RegisterHeading />
 
         <RegisterCarousel />
@@ -280,63 +355,50 @@ const Register = () => {
                     toggleFlip(role.id);
                   }
                 }}
-                className="aspect-[3/2] w-full cursor-pointer [perspective:1000px] focus-visible:outline-none"
+                className="aspect-[341/227] w-full cursor-pointer [perspective:1000px] focus-visible:outline-none"
               >
-                <div className="h-full w-full rounded-[10px] transition-transform duration-300 ease-out [transform-style:preserve-3d] hover:scale-[1.03]">
+                <div className="h-full w-full transition-transform duration-300 ease-out [transform-style:preserve-3d] hover:scale-[1.03]">
                   <div
                     className={[
                       cardFlipper,
-                      registerShadow,
                       isFlipped ? "[transform:rotateY(180deg)]" : "",
                     ].join(" ")}
                   >
                     <div className={`${cardFace} [transform:rotateY(0deg)]`}>
-                      <div className={cardShell}>
-                        <div className={cardFrame}>
-                          <div className={cardInner}>
-                            <div className="flex min-h-0 flex-1 items-end justify-center px-4 pt-6 pb-1">
-                              <Image
-                                src={role.image}
-                                alt=""
-                                width={90}
-                                height={103}
-                                className={`h-20 w-auto object-contain sm:h-24${
-                                  role.id === "mentor" ? " translate-y-4" : ""
-                                }`}
-                              />
-                            </div>
-                            <div className="flex shrink-0 justify-center px-4 pt-1 pb-6">
-                              <span className="font-fraunces text-xl font-semibold tracking-wide text-blue-900 uppercase sm:text-2xl">
-                                {role.name}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <Image
+                        src={`/register/desktop_front/${role.name}.svg`}
+                        alt=""
+                        width={341}
+                        height={227}
+                        draggable={false}
+                        className="pointer-events-none h-full w-full"
+                      />
                     </div>
 
                     <div className={`${cardFace} [transform:rotateY(180deg)]`}>
-                      <div className={cardShell}>
-                        <div className={cardFrame}>
-                          <div className={cardInner}>
-                            <p className="font-labrada min-h-0 flex-1 overflow-y-auto px-2 pt-2 text-left text-sm leading-normal font-normal tracking-normal xl:text-[15.5px]">
-                              {role.description}
-                            </p>
-                            {role.applyHref && (
-                              <a
-                                href={role.applyHref}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(event) => event.stopPropagation()}
-                                onKeyDown={(event) => event.stopPropagation()}
-                                className={`${applyButton} mx-4 mb-3 mt-2 h-8 w-48 self-end px-3 text-center text-xs sm:text-sm`}
-                              >
-                                Apply as {role.name}
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+                      <Image
+                        src={`/register/desktop_back/${role.name}.svg`}
+                        alt=""
+                        width={341}
+                        height={227}
+                        draggable={false}
+                        className="pointer-events-none h-full w-full"
+                      />
+                      <p className="sr-only">{role.description}</p>
+                      {role.applyHref && (
+                        <a
+                          href={role.applyHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(event) => event.stopPropagation()}
+                          onKeyDown={(event) => event.stopPropagation()}
+                          className={`${applyButton} group absolute right-[calc(5.5%+1rem)] bottom-[calc(12.4%+0.75rem)] h-8 w-52 rounded-xl! px-3 text-center text-base`}
+                        >
+                          <span className="inline-block transition-transform duration-200 ease-out group-hover:scale-90">
+                            Apply as {role.name}
+                          </span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
