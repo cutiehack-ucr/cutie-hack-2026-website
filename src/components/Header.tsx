@@ -352,10 +352,10 @@ const Header = () => {
 
         {menuOpen && (
           <div
-            className={`bg-white-100 fixed inset-x-0 top-0 z-40 flex h-1/2 flex-col ${fadeIn}`}
+            className={`bg-white-100 fixed inset-x-0 top-0 z-40 flex min-h-11/16 flex-col ${fadeIn}`}
           >
             <nav
-              className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-6 pt-24 pb-6 text-xl"
+              className="flex min-h-0 flex-1 flex-col overflow-y-auto px-6 pt-24 pb-6 text-xl md:text-3xl md:gap-3"
               aria-label="Main"
             >
               {navLinks.map(({ href, label, dropdown }, index) => {
@@ -385,7 +385,7 @@ const Header = () => {
                         onClick={() =>
                           setOpenMobileDropdown(isOpen ? null : href)
                         }
-                        className={`relative inline-flex cursor-pointer items-center gap-1 py-2 ${
+                        className={`relative inline-flex cursor-pointer items-center gap-2 py-[1vw] ${
                           active
                             ? "after:opacity-100"
                             : "after:opacity-0 hover:after:opacity-50"
@@ -401,7 +401,7 @@ const Header = () => {
                       </button>
                       {isOpen && (
                         <div
-                          className={`mb-1 ml-3 flex flex-col gap-1 text-lg ${fadeIn}`}
+                          className={`mb-1 ml-[4vw] flex flex-col gap-[1.5vw] text-lg md:text-2xl ${fadeIn}`}
                         >
                           {dropdown.map((item) => (
                             <Link
@@ -410,7 +410,7 @@ const Header = () => {
                               onClick={(event) =>
                                 scrollToSection(event, item.href.slice(1))
                               }
-                              className="rounded-md px-2 py-1.5"
+                              className="rounded-md px-2"
                             >
                               {item.label}
                             </Link>
@@ -426,7 +426,7 @@ const Header = () => {
                     key={fadeBelow ? `${href}-${openMobileDropdown}` : href}
                     href={href}
                     onClick={(event) => scrollToSection(event, href.slice(1))}
-                    className={`after:from-gold-500 after:to-brown-700 relative inline-flex w-fit py-2 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:transition-opacity after:duration-300 ${
+                    className={`after:from-gold-500 after:to-brown-700 relative inline-flex w-fit py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gradient-to-r after:transition-opacity after:duration-300 ${
                       fadeBelow ? fadeIn : ""
                     } ${
                       active
@@ -448,7 +448,7 @@ const Header = () => {
                   openMobileDropdown ? fadeIn : ""
                 }`}
               >
-                <span className="from-gold-500 to-brown-700 bg-gradient-to-b bg-clip-text text-transparent">
+                <span className="from-gold-500 to-brown-700 bg-gradient-to-b bg-clip-text text-transparent py-1">
                   Dashboard
                 </span>
               </a>
