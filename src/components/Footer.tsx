@@ -74,7 +74,7 @@ const socialCards = [
 
 const SocialCards = ({ mobile = false }: { mobile?: boolean }) => (
   <div
-    className={`relative z-20 flex items-end ${mobile ? "w-full translate-x-3 justify-center gap-0 pb-3 min-[400px]:gap-2" : "ml-1 pb-38"}`}
+    className={`relative z-20 flex items-end ${mobile ? "w-full translate-x-3 justify-center gap-0 pb-[4vw]" : "ml-1 pb-38"}`}
   >
     {socialCards.map(
       ({ label, href, card, offset, offset2, offset3, offset4 }) => {
@@ -96,7 +96,7 @@ const SocialCards = ({ mobile = false }: { mobile?: boolean }) => (
                 alt=""
                 width={126}
                 height={168}
-                className={`w-auto ${mobile ? "h-20" : "z-31 h-44"}`}
+                className={`w-auto ${mobile ? "h-[21.5vw]" : "z-31 h-44"}`}
               />
             </a>
           </div>
@@ -108,8 +108,19 @@ const SocialCards = ({ mobile = false }: { mobile?: boolean }) => (
 
 const Footer = () => {
   return (
-    <footer id="footer" className="z-10 relative overflow-hidden">
-      <div className="flex flex-col items-center lg:flex-row lg:items-start lg:justify-end lg:gap-[5vw]">
+    <footer
+      id="footer"
+      className="relative z-10 overflow-x-clip max-lg:z-0"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[-100%] bottom-0 -z-10 max-lg:bg-[linear-gradient(to_bottom,var(--color-green-100),var(--color-blue-500)_100%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[-100%] bottom-0 -z-10 opacity-20 max-lg:bg-[radial-gradient(circle_at_0%_0%,var(--color-green-100)_0%,var(--color-green-100)_50%,var(--color-green-900)_100%)] lg:hidden"
+      />
+      <div className="relative z-10 flex flex-col items-center lg:flex-row lg:items-start lg:justify-end lg:gap-[5vw]">
         {/*opportunities */}
         <div className="mt-30 flex w-full flex-col items-center gap-5 lg:mt-[10vw] lg:w-auto">
           <h2 className="font-fraunces text-white-100 w-full text-center text-4xl lg:text-[2.5vw]">
@@ -130,7 +141,7 @@ const Footer = () => {
           </div>
         </div>
         {/*castle */}
-        <div className="relative z-20 mt-10 w-[min(92vw,330px)] shrink-0 self-end lg:mt-[5vw] lg:mb-[0vw] lg:w-[45vw]">
+        <div className="relative z-20 mt-10 w-[80vw] shrink-0 self-end lg:mt-[5vw] lg:mb-[0vw] lg:w-[45vw]">
           <Image
             src="/footer/footer castle.svg"
             alt="castle"
@@ -141,7 +152,7 @@ const Footer = () => {
         </div>
       </div>
       {/* mobile ground */}
-      <div className="relative z-10 -mt-[5vw] lg:hidden">
+      <div className="relative z-5 -mt-[3vw] lg:hidden">
         <Image
           src="/footer/mobileGrassland.svg"
           alt=""
