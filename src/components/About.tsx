@@ -55,11 +55,11 @@ const SectionTitle = ({ children }: { children: string }) => (
       alt=""
       width={43}
       height={48}
-      className={`block h-5 w-auto sm:h-9 ${diamondShadow}`}
+      className={`block h-8 w-auto sm:h-9 ${diamondShadow}`}
       aria-hidden
     />
     <span
-      className={`from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[22px] font-semibold tracking-normal text-transparent sm:text-[32px] ${titleShadow}`}
+      className={`from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] ${titleShadow}`}
     >
       {children}
     </span>
@@ -68,7 +68,7 @@ const SectionTitle = ({ children }: { children: string }) => (
       alt=""
       width={43}
       height={48}
-      className={`block h-5 w-auto sm:h-9 ${diamondShadow}`}
+      className={`block h-8 w-auto sm:h-9 ${diamondShadow}`}
       aria-hidden
     />
   </h2>
@@ -113,7 +113,7 @@ const ValueMirrorCard = ({
         alt=""
         width={243}
         height={283}
-        className="pointer-events-none h-auto w-full"
+        className={`pointer-events-none h-auto w-full ${diamondShadow}`}
       />
       <span className="pointer-events-none absolute inset-[13.1%_9.8%_13.9%_10%] flex items-center justify-center px-2 sm:px-4">
         <span
@@ -176,13 +176,15 @@ const About = () => {
             alt="Cutie Hack stats"
             width={536}
             height={599}
-            className="pointer-events-none h-auto w-full"
+            className={`pointer-events-none h-auto w-full ${diamondShadow}`}
           />
         </div>
       </div>
 
       <div className="mx-auto mt-4 flex max-w-6xl flex-col items-center gap-3 xl:items-start">
-        <h3 className={`from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] xl:text-left ${titleShadow}`}>
+        <h3
+          className={`from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] xl:text-left ${titleShadow}`}
+        >
           Our Values
         </h3>
         <p className="font-labrada text-center text-base text-gray-100 sm:text-lg xl:text-left xl:text-[22px]">
