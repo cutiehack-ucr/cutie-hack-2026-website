@@ -66,16 +66,16 @@ const applyButton =
   `inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-normal ${registerButtonShadow} transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500`;
 
 const RegisterHeading = () => (
-  <h2 className="flex items-center gap-10 pb-1 md:pb-3">
+  <h2 className="flex items-center justify-center gap-3 pb-1 leading-none sm:gap-10 md:pb-3">
     <Image
       src="/diamond.svg"
       alt=""
       width={43}
       height={48}
-      className={`block h-9 w-auto ${registerDropShadow}`}
+      className={`block h-8 w-auto sm:h-9 ${registerDropShadow}`}
       aria-hidden
     />
-    <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-[32px] font-semibold leading-normal tracking-normal text-transparent [text-shadow:0_6px_4px_rgba(0,0,0,0.25)]">
+    <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] [text-shadow:0_6px_4px_rgba(0,0,0,0.25)]">
       Register
     </span>
     <Image
@@ -83,7 +83,7 @@ const RegisterHeading = () => (
       alt=""
       width={43}
       height={48}
-      className={`block h-9 w-auto ${registerDropShadow}`}
+      className={`block h-8 w-auto sm:h-9 ${registerDropShadow}`}
       aria-hidden
     />
   </h2>
@@ -233,7 +233,7 @@ const RegisterCarousel = () => {
           event.preventDefault();
           event.stopPropagation();
         }}
-        className="-mx-6 flex w-[calc(100%+3rem)] cursor-grab snap-x snap-proximity select-none [-webkit-user-drag:none] [scrollbar-width:none] gap-4 overflow-x-auto px-[calc((100%-min(84vw,280px))/2)] pt-1 pb-1 [-ms-overflow-style:none] active:cursor-grabbing sm:-mx-14 sm:w-[calc(100%+7rem)] [&::-webkit-scrollbar]:hidden [&_img]:pointer-events-none [&_img]:[-webkit-user-drag:none]"
+        className="-mx-6 flex w-[calc(100%+3rem)] cursor-grab snap-x snap-proximity select-none [-webkit-user-drag:none] [scrollbar-width:none] gap-4 overflow-x-auto px-[calc((100%-min(84vw,280px))/2)] pt-2 pb-4 [-ms-overflow-style:none] active:cursor-grabbing sm:-mx-14 sm:w-[calc(100%+7rem)] [&::-webkit-scrollbar]:hidden [&_img]:pointer-events-none [&_img]:[-webkit-user-drag:none]"
       >
         {roles.map((role, index) => (
           <article
@@ -248,7 +248,7 @@ const RegisterCarousel = () => {
               height={301}
               draggable={false}
               onDragStart={(event) => event.preventDefault()}
-              className="pointer-events-none h-auto w-full select-none [-webkit-user-drag:none]"
+              className={`pointer-events-none h-auto w-full select-none [-webkit-user-drag:none] ${registerDropShadow}`}
             />
             <p className="sr-only">
               {role.name}. {role.description}
@@ -371,7 +371,7 @@ const Register = () => {
                         width={341}
                         height={227}
                         draggable={false}
-                        className="pointer-events-none h-auto w-full"
+                        className={`pointer-events-none h-auto w-full ${registerDropShadow}`}
                       />
                     </div>
 
@@ -382,7 +382,7 @@ const Register = () => {
                         width={341}
                         height={227}
                         draggable={false}
-                        className="pointer-events-none h-auto w-full"
+                        className={`pointer-events-none h-auto w-full ${registerDropShadow}`}
                       />
                       <p className="sr-only">{role.description}</p>
                       {role.applyHref && (
