@@ -161,7 +161,7 @@ const Industry = () => {
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center">
         <h2
-          className="flex items-center gap-10 leading-none"
+          className="flex items-center gap-6 leading-none"
           style={{
             filter: "drop-shadow(0px 2.79px 2.79px rgba(0, 0, 0, 0.25))",
           }}
@@ -174,7 +174,7 @@ const Industry = () => {
             className="block h-9 w-auto"
             aria-hidden
           />
-          <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-[0.2em] text-[32px] font-semibold leading-[1.35] tracking-normal text-transparent">
+          <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-[0.2em] text-[22px] font-semibold leading-[1.35] tracking-normal text-transparent">
             Industry
           </span>
           <Image
