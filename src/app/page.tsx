@@ -17,8 +17,8 @@ export default function Home() {
       <Hero />
       <Register />
       <About />
-      <PastProjects />
       {/*
+      <PastProjects />
       <Tracks />
       <Schedule />
       <Sponsors />
