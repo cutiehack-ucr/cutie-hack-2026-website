@@ -19,10 +19,12 @@ const projectFrames = [
     width: 234,
     height: 343,
     className:
-      "w-[32vw] rotate-[16deg] lg:absolute lg:-top-8 lg:left-2 lg:w-40 lg:rotate-0 xl:left-4 xl:w-48",
+      "w-[32vw] rotate-[16deg] lg:absolute lg:top-5 lg:-left-2 lg:w-40 lg:rotate-0 xl:left-0 xl:w-48",
     labelClass: "text-[#AF85C3]",
     imageInset:
-      "top-[35%] right-[18%] bottom-[11%] left-[21%] -rotate-[8deg] rounded-md lg:top-[36%] lg:right-[19%] lg:bottom-[12%] lg:left-[23%] lg:rounded-2xl",
+      "top-[18%] right-[20%] bottom-[14%] left-[18%] -rotate-[8deg] rounded-lg lg:rounded-3xl",
+    frameStrings:"/pastprojects/stringsPurple.svg",
+    stringOffset:"top-0 left-[15%] -translate-y-[43%]",
   },
   {
     index: 2,
@@ -35,6 +37,8 @@ const projectFrames = [
     labelClass: "text-[#7B9853]",
     imageInset:
       "top-[15%] right-[23.8%] bottom-[16%] left-[23.5%] -rotate-[6.8deg]",
+    frameStrings:"",
+    stringOffset:"",
   },
   {
     index: 3,
@@ -46,6 +50,8 @@ const projectFrames = [
       "w-[30vw] lg:absolute lg:top-[8%] lg:right-4 lg:w-32 xl:right-2 xl:w-40",
     labelClass: "text-[#E38649]",
     imageInset: "top-[8%] right-[10%] bottom-[7%] left-[10%] rounded-[50%]",
+    frameStrings:"",
+    stringOffset:"",
   },
   {
     index: 4,
@@ -54,10 +60,12 @@ const projectFrames = [
     width: 362,
     height: 304,
     className:
-      "w-[55vw] -translate-y-8 -rotate-[11.6deg] lg:absolute lg:top-[40%] lg:-right-10 lg:w-56 lg:translate-y-0 lg:rotate-0 xl:-right-16 xl:w-72",
+      "w-[55vw] translate-y-0 -rotate-[11.6deg] lg:absolute lg:top-[40%] lg:-right-10 lg:w-56 lg:translate-y-23 lg:rotate-0 xl:-right-16 xl:w-72",
     labelClass: "text-[#AE3E3D]",
     imageInset:
-      "top-[44.2%] right-[19%] bottom-[16%] left-[16.7%] rotate-[5.8deg] rounded-2xl",
+      "top-[22%] right-[17.7%] bottom-[22%] left-[17%] rotate-[5.8deg] rounded-2xl",
+    frameStrings:"/pastprojects/stringsRed.svg",
+    stringOffset:"top-0 left-[19%] -translate-y-[43%]",
   },
 ] as const;
 
@@ -71,6 +79,8 @@ function PastProjectBubble({
   className,
   labelClass,
   imageInset,
+  frameStrings,
+  stringOffset,
 }: {
   project: Project;
   onClick: () => void;
@@ -81,8 +91,11 @@ function PastProjectBubble({
   className: string;
   labelClass: string;
   imageInset: string;
+  frameStrings: string;
+  stringOffset: string;
 }) {
   const showHoverImage = Boolean(project.image);
+  const showStrings = Boolean(frameStrings);
 
   return (
     <button
@@ -102,6 +115,15 @@ function PastProjectBubble({
       >
         {label}
       </span>
+      {showStrings && (
+        <Image
+          src={frameStrings!}
+          alt="frame_strings"
+          height={100}
+          width={100}
+          className={`max-lg:hidden block absolute h-auto w-auto pointer-events-none ${stringOffset} -z-1`}
+        />
+      )}
       {showHoverImage && (
         <div
           className={`pointer-events-none absolute z-[1] overflow-hidden opacity-0 transition-opacity group-hover:opacity-100 ${imageInset}`}
@@ -110,7 +132,7 @@ function PastProjectBubble({
             src={project.image!}
             alt=""
             fill
-            className="object-cover"
+            className="object-cover h-auto w-auto"
           />
         </div>
       )}
@@ -145,8 +167,10 @@ const PastProjects = () => {
     const curProject = PROJECTS[curIndex];
     const prevProj = () => setIndex((i) => (i-1+PROJECTS.length) % PROJECTS.length);
     const nextProj = () => setIndex((i) => (i+1) % PROJECTS.length);
-    const shelfContentSrc = `/pastprojects/shelfContents${shelfContents[curIndex]}.svg`;
     const isRedShelf = shelfContents[curIndex] === "Red";
+    const shelfContentSrc = isRedShelf
+      ? "/pastprojects/shelfContentsRed.png"
+      : `/pastprojects/shelfContents${shelfContents[curIndex]}.svg`;
 
   return (
     <section id="past-projects" className="w-full px-10 py-16 text-black">
@@ -296,6 +320,8 @@ const PastProjects = () => {
             className={item.className}
             labelClass={item.labelClass}
             imageInset={item.imageInset}
+            frameStrings={item.frameStrings}
+            stringOffset={item.stringOffset}
           />
         ))}
       </div>
