@@ -16,7 +16,7 @@ const thirdOverall = TRACKS.find((track) => track.id === "third-overall")!;
 
 const SectionTitle = ({ children }: { children: string }) => (
   <h2
-    className="flex items-center justify-center gap-3 leading-none sm:gap-10"
+    className="flex items-center justify-center gap-6 leading-none"
     style={{ filter: "drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.25))" }}
   >
     <Image
@@ -24,10 +24,10 @@ const SectionTitle = ({ children }: { children: string }) => (
       alt=""
       width={43}
       height={48}
-      className="block h-5 w-auto sm:h-9"
+      className="block h-9 w-auto"
       aria-hidden
     />
-    <span className="bg-linear-to-b from-white-100 to-orange-500 bg-clip-text text-center font-fraunces text-[22px] font-semibold tracking-normal text-transparent sm:text-[32px]">
+    <span className="bg-linear-to-b from-white-100 to-orange-500 bg-clip-text text-center font-fraunces text-[22px] font-semibold tracking-normal text-transparent">
       {children}
     </span>
     <Image
@@ -35,7 +35,7 @@ const SectionTitle = ({ children }: { children: string }) => (
       alt=""
       width={43}
       height={48}
-      className="block h-5 w-auto sm:h-9"
+      className="block h-9 w-auto"
       aria-hidden
     />
   </h2>

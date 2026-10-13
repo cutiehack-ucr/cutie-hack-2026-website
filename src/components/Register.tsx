@@ -66,16 +66,16 @@ const applyButton =
   `inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-normal ${registerButtonShadow} transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500`;
 
 const RegisterHeading = () => (
-  <h2 className="flex items-center justify-center gap-3 pb-1 leading-none sm:gap-10 md:pb-3">
+  <h2 className="flex items-center justify-center gap-6 pb-1 leading-none md:pb-3">
     <Image
       src="/diamond.svg"
       alt=""
       width={43}
       height={48}
-      className={`block h-8 w-auto sm:h-9 ${registerDropShadow}`}
+      className={`block h-9 w-auto ${registerDropShadow}`}
       aria-hidden
     />
-    <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[28px] font-semibold tracking-normal text-transparent sm:text-[32px] [text-shadow:0_6px_4px_rgba(0,0,0,0.25)]">
+    <span className="from-white-100 font-fraunces inline-block bg-linear-to-b to-orange-500 bg-clip-text pb-1 text-center text-[22px] font-semibold tracking-normal text-transparent [text-shadow:0_6px_4px_rgba(0,0,0,0.25)]">
       Register
     </span>
     <Image
@@ -83,7 +83,7 @@ const RegisterHeading = () => (
       alt=""
       width={43}
       height={48}
-      className={`block h-8 w-auto sm:h-9 ${registerDropShadow}`}
+      className={`block h-9 w-auto ${registerDropShadow}`}
       aria-hidden
     />
   </h2>
