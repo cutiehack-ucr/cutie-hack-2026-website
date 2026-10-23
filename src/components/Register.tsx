@@ -64,6 +64,25 @@ const registerButtonShadow =
   "shadow-[0_2.13px_4.26px_0_rgba(0,0,0,0.25)]";
 const applyButton =
   `inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-gold-500 font-fraunces font-normal ${registerButtonShadow} transition-colors duration-200 ease-out hover:border-gold-500 hover:bg-linear-to-b hover:from-white-100 hover:to-gold-500`;
+const cardTitle =
+  "pointer-events-none absolute inset-x-0 top-[65.64%] m-0 text-center font-labrada text-[6.745cqw] leading-none font-semibold tracking-[0.03em] text-blue-900 uppercase";
+const cardDescription =
+  "pointer-events-none absolute top-[8.81%] left-[8.8%] m-0 w-[82.1%] font-labrada text-[5.279cqw] leading-[7.625cqw] font-normal text-blue-900";
+
+const renderDescription = (description: string) => {
+  const withBreaks = description.replaceAll("/", "/\u200b");
+  const email = "cutiehack@gmail.com";
+  if (!withBreaks.includes(email)) return withBreaks;
+
+  const [before, after] = withBreaks.split(email);
+  return (
+    <>
+      {before}
+      <strong className="font-semibold">{email}</strong>
+      {after}
+    </>
+  );
+};
 
 const RegisterHeading = () => (
   <h2 className="flex items-center justify-center gap-3 pb-1 leading-none sm:gap-10 md:pb-3">
@@ -359,9 +378,9 @@ const Register = () => {
                     toggleFlip(role.id);
                   }
                 }}
-                className="aspect-[341/227] w-full cursor-pointer [perspective:1000px] focus-visible:outline-none"
+                className="group relative aspect-[341/227] w-full cursor-pointer [perspective:1000px] focus-visible:outline-none"
               >
-                <div className="h-full w-full transition-transform duration-300 ease-out [transform-style:preserve-3d] hover:scale-[1.03]">
+                <div className="@container absolute top-0 left-0 h-full w-full transition-[top,left,width,height] duration-300 ease-out [transform-style:preserve-3d] group-hover:top-[-1.5%] group-hover:left-[-1.5%] group-hover:h-[103%] group-hover:w-[103%]">
                   <div
                     className={[
                       cardFlipper,
@@ -377,6 +396,7 @@ const Register = () => {
                         draggable={false}
                         className={`pointer-events-none h-auto w-full ${registerDropShadow}`}
                       />
+                      <p className={cardTitle}>{role.name}</p>
                     </div>
 
                     <div className={`${cardFace} [transform:rotateY(180deg)]`}>
@@ -388,7 +408,9 @@ const Register = () => {
                         draggable={false}
                         className={`pointer-events-none h-auto w-full ${registerDropShadow}`}
                       />
-                      <p className="sr-only">{role.description}</p>
+                      <p className={cardDescription}>
+                        {renderDescription(role.description)}
+                      </p>
                       {role.applyHref && (
                         <a
                           href={role.applyHref}
