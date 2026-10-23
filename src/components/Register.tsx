@@ -23,7 +23,7 @@ const roles: RoleCard[] = [
     name: "Mentor",
     description:
       "Meet a variety of hackers across engineering, design, and more. Guide hackers by providing project insight and advice.",
-    applyHref: "cutiehack@gmail.com",
+    applyHref: "mailto:cutiehack@gmail.com",
   },
   {
     id: "judge",
@@ -256,8 +256,12 @@ const RegisterCarousel = () => {
             {role.applyHref && (
               <a
                 href={role.applyHref}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={role.applyHref.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  role.applyHref.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
                 className={`${applyButton} absolute bottom-[12%] left-[13%] right-[13%] h-10 rounded-[10px]! text-base sm:text-lg`}
               >
                 Apply as {role.name}
@@ -388,8 +392,16 @@ const Register = () => {
                       {role.applyHref && (
                         <a
                           href={role.applyHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          target={
+                            role.applyHref.startsWith("mailto:")
+                              ? undefined
+                              : "_blank"
+                          }
+                          rel={
+                            role.applyHref.startsWith("mailto:")
+                              ? undefined
+                              : "noopener noreferrer"
+                          }
                           onClick={(event) => event.stopPropagation()}
                           onKeyDown={(event) => event.stopPropagation()}
                           className={`${applyButton} absolute right-[calc(5.5%+1rem)] bottom-[calc(12.4%+0.75rem)] h-8 w-52 rounded-xl! px-3 text-center text-base`}
