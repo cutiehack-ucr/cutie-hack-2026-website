@@ -64,9 +64,9 @@ function Diamond() {
     <Image
       src="/red_diamond.svg"
       alt=""
-      width={30}
-      height={33}
-      className="shrink-0"
+      width={43}
+      height={48}
+      className="block h-9 w-auto shrink-0"
       aria-hidden
     />
   );
@@ -119,9 +119,9 @@ export default function FAQ() {
           />
 
           <div className="relative z-1 flex h-full flex-col px-[8%] pt-[7%] pb-[8%] max-lg:h-auto max-lg:p-6">
-            <h2 className="mb-[4%] flex shrink-0 items-center justify-center gap-[clamp(16px,3vw,40px)] leading-none">
+            <h2 className="mb-[4%] flex shrink-0 items-center justify-center gap-6 leading-none">
               <Diamond />
-              <span className="font-fraunces text-2xl font-bold tracking-normal text-red-500 lg:text-4xl">
+              <span className="font-fraunces text-[22px] font-bold tracking-normal text-red-500">
                 FAQ
               </span>
               <Diamond />
