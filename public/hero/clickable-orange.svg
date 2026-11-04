@@ -7,12 +7,6 @@
 <defs>
 <filter id="filter0_dn_2515_1728" x="98.9844" y="74.0811" width="127.759" height="126.262" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="4"/>
-<feGaussianBlur stdDeviation="2"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2515_1728"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feTurbulence type="fractalNoise" baseFrequency="1.0000730752944946 1.0000730752944946" stitchTiles="stitch" numOctaves="3" result="noise" seed="4068" />
 <feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise" />
@@ -26,7 +20,6 @@
 <feMergeNode in="shape" />
 <feMergeNode in="color1" />
 </feMerge>
-<feBlend mode="normal" in="effect2_noise_2515_1728" in2="effect1_dropShadow_2515_1728" result="effect2_noise_2515_1728"/>
 </filter>
 <radialGradient id="paint0_radial_2515_1728" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(162.863 133.212) rotate(90) scale(58.577 60.4076)">
 <stop stop-color="#F6B74E"/>
