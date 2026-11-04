@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
-    <main className="relative flex flex-col overflow-x-clip">
+    <main className="relative flex flex-col overflow-x-clip overflow-y-clip">
       <Hero />
       <Register />
       <About />
