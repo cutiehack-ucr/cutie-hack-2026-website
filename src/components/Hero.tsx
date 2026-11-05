@@ -335,6 +335,42 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* mobile-only lower copy */}
+      <div className={styles.mobileCopy}>
+        <p className={styles.mobileDate}>
+          November 21, 2026
+          <br />
+          UC Riverside - Winston Chung
+        </p>
+
+        <p className={styles.mobileDescription}>
+          A 12 hour journey where imagination meets innovation.
+        </p>
+
+        <div className={styles.mobileActions}>
+          <a
+            href="#register"
+            className={styles.mobilePrimaryButton}
+            onClick={handleRegisterClick}
+          >
+            <span>Register Now</span>
+          </a>
+
+          {/* <a href="#" className={styles.mobileSecondaryButton}>
+            <span>Live Site</span>
+          </a> */}
+
+          <a
+            href="https://cutie-hack-2026.devpost.com/"
+            className={styles.mobileSecondaryButton}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Devpost</span>
+          </a>
+        </div>
+      </div>
+
       {/* clickable orange */}
       <button
         type="button"
