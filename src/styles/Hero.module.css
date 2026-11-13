@@ -975,3 +975,19 @@
             0 6px 6px rgba(0, 0, 0, 0.22);
     }
 }
+.mobilePrimaryButton,
+.mobileSecondaryButton {
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.mobilePrimaryButton:hover,
+.mobileSecondaryButton:hover {
+    transform: translateY(-2px);
+}
+
+.mobileSecondaryButton:hover {
+    color: #1e3a8a;
+}
